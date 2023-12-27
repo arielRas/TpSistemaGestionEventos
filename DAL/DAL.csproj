@@ -31,8 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,7 +51,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DbEntities\ContextDb.cs" />
+    <Compile Include="DbEntities\EVENTO.cs" />
+    <Compile Include="DbEntities\EVENTO_PROVEEDOR_SERVICIO.cs" />
+    <Compile Include="DbEntities\FECHA_RESERVADA.cs" />
+    <Compile Include="DbEntities\INVITADO.cs" />
+    <Compile Include="DbEntities\ORGANIZADOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DbEntities\PROVEEDOR.cs" />
+    <Compile Include="DbEntities\PROVINCIA.cs" />
+    <Compile Include="DbEntities\SERVICIO.cs" />
+    <Compile Include="DbEntities\SERVICIO_PUBLICADO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
@@ -50,8 +69,10 @@
       <Name>Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DbEntities\" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
