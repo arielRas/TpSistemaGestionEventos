@@ -26,6 +26,8 @@ namespace DAL
         [StringLength(30)]
         public string APELLIDO { get; set; }
 
+        public int CANT_COMPANIONS { get; set; }
+
         public virtual EVENTO EVENTO { get; set; }
     }
 }

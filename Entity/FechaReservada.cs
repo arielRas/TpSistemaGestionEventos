@@ -8,25 +8,17 @@ namespace Entity
 {
     public class FechaReservada
     {
-        public FechaReservada(DateTime fecha, int maxReservas) 
-        {
-            this.fecha = fecha;
-            this.maxReservas = maxReservas;
-        }
-
+       
         //ATRIBUTOS
         private DateTime fecha;
+        private int reservas;
         private int maxReservas;
 
-        //PROPIEDADES
-        public DateTime Fecha { get => fecha;}
-        public int MaxReservas { get => maxReservas; }
 
-        //METODOS
-        public void AgregarReserva()
-        {
-            if (maxReservas > 0) this.maxReservas--;
-                else throw new Exception("El provedor ha alcanzado el limite diario para brindar este servicio");
-        }
+        //PROPIEDADES
+        public DateTime Fecha { get => fecha; set => fecha = value; }
+        public int Reservas { get => reservas; set => reservas = value; }
+        public int MaxReservas { get => maxReservas; set => maxReservas = value; }
+
     }
 }
