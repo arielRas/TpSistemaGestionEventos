@@ -10,6 +10,32 @@ namespace DAL
 {
     public class EventoDao
     {
+        public bool ExisteEvento(Guid codEvento)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    return ctx.EVENTO.Any(E => E.ID_EVENTO == codEvento);
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public bool HayEventos(Guid codOrganizador)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    return ctx.EVENTO.Any(E => E.ID_ORGANIZADOR == codOrganizador);
+                }
+            }
+            catch { throw; }
+        }
+
+
         public void AltaEvento(Evento evento, Guid codOrganizador)
         {
             try
@@ -73,7 +99,57 @@ namespace DAL
         }
 
 
-        public List<Evento> GetAllEventos(Guid codOrganizador)
+        public Evento GetEvento(Guid codEvento)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var eventoDb = ctx.EVENTO.SingleOrDefault(E => E.ID_EVENTO == codEvento) ?? throw new ArgumentException("No se encuentra el evento indicado");
+
+                    var evento = new Evento
+                    {
+                        CodigoEvento = eventoDb.ID_EVENTO,
+                        NombreEvento = eventoDb.NOMBRE,
+                        FechaHora = eventoDb.FECHA_HORA,
+                        Provincia = ProvinciaDao.GetProvincia(eventoDb.ID_PROVINCIA.Value),
+                        Direccion = eventoDb.DIRECCION,
+                        Descripcion = eventoDb.DESCRIPCION,
+                        CantMaxInvitados = eventoDb.CANT_INVITADOS
+                    };
+
+                    return evento;
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public EventoPublic GetEventoPublic(Guid codEvento)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var eventoDb = ctx.EVENTO.SingleOrDefault(E => E.ID_EVENTO == codEvento) ?? throw new Exception("No se encuentra el evento indicado");
+
+                    var eventoPublic = new EventoPublic
+                    {
+                        CodigoEvento = eventoDb.ID_EVENTO,
+                        NombreEvento = eventoDb.NOMBRE,
+                        FechaHora = eventoDb.FECHA_HORA,
+                        Provincia = ProvinciaDao.GetProvincia(eventoDb.ID_PROVINCIA.Value),
+                        Direccion = eventoDb.DIRECCION
+                    };
+
+                    return eventoPublic;
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public List<Evento> GetAllEventosPublic(Guid codOrganizador)
         {
             try
             {
@@ -91,9 +167,7 @@ namespace DAL
                             NombreEvento = eventoDb.NOMBRE,
                             FechaHora = eventoDb.FECHA_HORA,
                             Provincia = ProvinciaDao.GetProvincia(eventoDb.ID_PROVINCIA.Value),
-                            Direccion = eventoDb.DIRECCION,
-                            Descripcion = eventoDb.DESCRIPCION,
-                            CantMaxInvitados = eventoDb.CANT_INVITADOS
+                            Direccion = eventoDb.DIRECCION
                         };
 
                         eventos.Add(evento);
