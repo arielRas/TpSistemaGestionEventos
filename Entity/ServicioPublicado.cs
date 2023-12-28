@@ -9,6 +9,7 @@ namespace Entity
     public class ServicioPublicado
     {
         //ATRIBUTOS
+        private Guid codPublicacion;
         private string titulo;
         private DateTime fechaPublicacion;
         private string descripcion;
@@ -22,6 +23,7 @@ namespace Entity
 
 
         //PROPIEDADES
+        public Guid CodPublicacion { get => codPublicacion; set => codPublicacion = value; }
         public string Titulo { get => titulo; set => titulo = value; }
         public DateTime FechaPublicacion { get => fechaPublicacion; set => fechaPublicacion = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
@@ -31,6 +33,6 @@ namespace Entity
         public bool ServFinDeSemana { get => servFinDeSemana; set => servFinDeSemana = value; }
         public bool ServEntreSemana { get => servEntreSemana; set => servEntreSemana = value; }
         public int MaxServPorDia { get => maxServPorDia; set => maxServPorDia = value; }
-        public List<FechaReservada> FechasReservados { get => fechasReservados; set => fechasReservados = value; }
+        public List<FechaReservada> FechasReservados { get => fechasReservados; set => fechasReservados = value; }        
     }
 }
