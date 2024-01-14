@@ -1,0 +1,30 @@
+USE DbGestionEventos;
+GO
+
+CREATE FUNCTION FN_VALIDAR_USUARIO(@typeUser BIT, @user VARCHAR(50), @pass VARCHAR(64))
+RETURNS BIT
+AS
+BEGIN
+	DECLARE @isValid BIT = 0;
+
+	IF @typeUser = 0
+		BEGIN
+			IF (SELECT COUNT(*) FROM ORGANIZADOR WHERE EMAIL = @user AND [PASSWORD] = @pass) = 1 
+			BEGIN
+				SET @isValid = 1;
+			END
+		END
+	ELSE
+		BEGIN
+			IF (SELECT COUNT(*) FROM PROVEEDOR WHERE EMAIL = @user AND [PASSWORD] = @pass) = 1 
+			BEGIN
+				SET @isValid = 1;
+			END
+		END
+
+	RETURN @isValid;
+END
+GO
+
+--SELECT * FROM ORGANIZADOR;
+--SELECT * FROM PROVEEDOR;
