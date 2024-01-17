@@ -8,6 +8,7 @@ namespace Entity
 {
     public class Servicio
     {
+        public int idServicio { get; set; }
         public string Categoria {  get; set; }
         public string Descripcion { get; set; }
     }

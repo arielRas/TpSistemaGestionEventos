@@ -67,6 +67,8 @@
     <Compile Include="ProvinciaDao.cs" />
     <Compile Include="DbEntities\SERVICIO.cs" />
     <Compile Include="DbEntities\SERVICIO_PUBLICADO.cs" />
+    <Compile Include="ServicioDao.cs" />
+    <Compile Include="ServicioPublicadoDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">

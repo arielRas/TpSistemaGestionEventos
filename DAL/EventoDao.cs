@@ -77,7 +77,7 @@ namespace DAL
         }
 
 
-        public void ModificarEvento(Evento evento)
+        public void ActualizarEvento(Evento evento)
         {
             try
             {
