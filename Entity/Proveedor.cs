@@ -15,17 +15,13 @@ namespace Entity
 
         //PROPIEDADES
 
-        Guid ISystemUser.Id { get; set; }
-        Int64 ISystemUser.Dni { get; set; }
-        string ISystemUser.Provincia { get; set; }
-        string ISystemUser.Direccion { get; set; }
-        string ISystemUser.Telefono { get; set; }
+        public Guid Id { get; set; }
+        public Int64 Dni { get; set; }
+        public string Provincia { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
         public float Puntaje { get => puntaje; set => puntaje = value; }
         public List<ServicioPublicado> ServiciosPublicados { get => serviciosPublicados; set => serviciosPublicados = value; }
         public List<ServicioContratado> ServiciosPorCumplir { get => serviciosPorCumplir; set => serviciosPorCumplir = value; }
-    }
-    
-        
-       
-        
+    }       
 }

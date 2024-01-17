@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class ProveedorDao
+    public class ProveedorDao
     {
-        public void AltaProveedor(Proveedor proveedor, byte[] pass, byte[] salt)
+        public void AltaProveedor(Proveedor proveedor)
         {
             try
             {
@@ -25,9 +25,7 @@ namespace DAL
                         DNI = proveedor.Dni,
                         TELEFONO = proveedor.Telefono,
                         ID_PROVINCIA = ProvinciaDao.GetIdProvincia(proveedor.Provincia),
-                        DIRECCION = proveedor.Direccion,
-                        SALT = salt,
-                        PASSWORD = pass
+                        DIRECCION = proveedor.Direccion                        
                     };
 
                     ctx.PROVEEDOR.Add(proveedorDb);
@@ -48,6 +46,7 @@ namespace DAL
 
                     var proveedor = new Proveedor
                     {
+                        Id = proveedorDb.ID_PROVEEDOR,
                         Nombre = proveedorDb.NOMBRE,
                         Apellido = proveedorDb.APELLIDO,
                         Email = proveedorDb.EMAIL,
@@ -70,7 +69,7 @@ namespace DAL
             {
                 using (ContextDb ctx = new ContextDb())
                 {
-                    var proveedorDb = ctx.PROVEEDOR.SingleOrDefault(P => P.ID_PROVEEDOR == proveedor.CodProveedor) ?? throw new Exception("El usuario solicitado no existe");
+                    var proveedorDb = ctx.PROVEEDOR.SingleOrDefault(P => P.ID_PROVEEDOR == proveedor.Id) ?? throw new Exception("El usuario solicitado no existe");
 
                     proveedorDb.NOMBRE = proveedor.Nombre;
                     proveedorDb.APELLIDO = proveedor.Apellido;
