@@ -44,8 +44,12 @@ namespace DAL
         public decimal? PUNTAJE { get; set; }
 
         [Required]
-        [StringLength(64)]
-        public string PASSWORD { get; set; }
+        [MaxLength(32)]
+        public byte[] SALT { get; set; }
+
+        [Required]
+        [MaxLength(32)]
+        public byte[] PASSWORD { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EVENTO_PROVEEDOR_SERVICIO> EVENTO_PROVEEDOR_SERVICIO { get; set; }

@@ -87,10 +87,6 @@ namespace DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<ORGANIZADOR>()
-                .Property(e => e.PASSWORD)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ORGANIZADOR>()
                 .HasMany(e => e.EVENTO)
                 .WithRequired(e => e.ORGANIZADOR)
                 .WillCascadeOnDelete(false);
@@ -118,10 +114,6 @@ namespace DAL
             modelBuilder.Entity<PROVEEDOR>()
                 .Property(e => e.PUNTAJE)
                 .HasPrecision(4, 2);
-
-            modelBuilder.Entity<PROVEEDOR>()
-                .Property(e => e.PASSWORD)
-                .IsUnicode(false);
 
             modelBuilder.Entity<PROVEEDOR>()
                 .HasMany(e => e.EVENTO_PROVEEDOR_SERVICIO)
