@@ -7,20 +7,18 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Organizador : Persona
+    public class Organizador : Persona, ISystemUser
     {
-        //ATRIBUTOS
-        private string provincia;
-        private string direccion;
-        private string telefono;
+        //ATRIBUTOS        
         private List<Evento> eventos = new List<Evento>();
-        private Int64 dni;
+      
 
         //PROPIEDADES
-        public Int64 Dni { get => dni; set => dni = value; }
-        public string Provincia { get => provincia; set => provincia = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
+        public Guid Id { get; set; }
+        public Int64 Dni { get; set; }
+        public string Provincia { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }        
         public List<Evento> Eventos { get => eventos; set => eventos = value; }
     }
 }

@@ -8,6 +8,10 @@ namespace Entity
 {
     public interface ISystemUser
     {
-
+        Guid Id { get; set; }
+        Int64 Dni { get; set; }
+        string Provincia { get; set; }
+        string Direccion { get; set; }
+        string Telefono { get; set; }
     }
 }

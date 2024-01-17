@@ -59,6 +59,7 @@
     <Compile Include="DbEntities\INVITADO.cs" />
     <Compile Include="InvitadoDao.cs" />
     <Compile Include="DbEntities\ORGANIZADOR.cs" />
+    <Compile Include="OrganizadorDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbEntities\PROVEEDOR.cs" />
     <Compile Include="DbEntities\PROVINCIA.cs" />
