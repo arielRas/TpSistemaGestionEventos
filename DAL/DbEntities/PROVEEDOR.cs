@@ -13,6 +13,7 @@ namespace DAL
         public PROVEEDOR()
         {
             EVENTO_PROVEEDOR_SERVICIO = new HashSet<EVENTO_PROVEEDOR_SERVICIO>();
+            PAGO = new HashSet<PAGO>();
             SERVICIO_PUBLICADO = new HashSet<SERVICIO_PUBLICADO>();
         }
 
@@ -43,16 +44,13 @@ namespace DAL
 
         public decimal? PUNTAJE { get; set; }
 
-        [Required]
-        [MaxLength(32)]
-        public byte[] SALT { get; set; }
-
-        [Required]
-        [MaxLength(32)]
-        public byte[] PASSWORD { get; set; }
+        public virtual CREDENCIALES CREDENCIALES { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EVENTO_PROVEEDOR_SERVICIO> EVENTO_PROVEEDOR_SERVICIO { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PAGO> PAGO { get; set; }
 
         public virtual PROVINCIA PROVINCIA { get; set; }
 

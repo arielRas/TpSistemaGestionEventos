@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbEntities\ContextDb.cs" />
+    <Compile Include="DbEntities\CREDENCIALES.cs" />
     <Compile Include="DbEntities\EVENTO.cs" />
     <Compile Include="EventoDao.cs" />
     <Compile Include="DbEntities\EVENTO_PROVEEDOR_SERVICIO.cs" />
@@ -60,15 +61,17 @@
     <Compile Include="InvitadoDao.cs" />
     <Compile Include="DbEntities\ORGANIZADOR.cs" />
     <Compile Include="OrganizadorDao.cs" />
+    <Compile Include="DbEntities\PAGO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbEntities\PROVEEDOR.cs" />
-    <Compile Include="DbEntities\PROVINCIA.cs" />
     <Compile Include="ProveedorDao.cs" />
+    <Compile Include="DbEntities\PROVINCIA.cs" />
     <Compile Include="ProvinciaDao.cs" />
     <Compile Include="DbEntities\SERVICIO.cs" />
-    <Compile Include="DbEntities\SERVICIO_PUBLICADO.cs" />
+    <Compile Include="ServicioContratadoDao.cs" />
     <Compile Include="ServicioDao.cs" />
     <Compile Include="ServicioPublicadoDao.cs" />
+    <Compile Include="DbEntities\SERVICIO_PUBLICADO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">

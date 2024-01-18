@@ -15,7 +15,7 @@ namespace DAL
             {
                 using (ContextDb ctx = new ContextDb())
                 {
-                    var ServicioPublicadoDb = new SERVICIO_PUBLICADO
+                    var servicioPublicadoDb = new SERVICIO_PUBLICADO
                     {
                         FECHA_PUBLICACION = servicioPublicado.FechaPublicacion,
                         NOMBRE = servicioPublicado.Titulo,
@@ -34,5 +34,71 @@ namespace DAL
         }
 
         public List<ServicioPublicado> GetAllServicioPublicado()
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var serviciosPublicadosDb = ctx.SERVICIO_PUBLICADO.ToList();
+
+                    var serviciosPublicados = new List<ServicioPublicado>();
+
+                    foreach(var servicioPublicadoDb in serviciosPublicadosDb)
+                    {
+                        var servicioPublicado = new ServicioPublicado
+                        {
+                            CodPublicacion = servicioPublicadoDb.ID_SERV_PUB,
+                            FechaPublicacion = servicioPublicadoDb.FECHA_PUBLICACION,
+                            Titulo = servicioPublicadoDb.NOMBRE,
+                            Descripcion = servicioPublicadoDb.DESCRIPCION,
+                            HaceEnvio = Convert.ToBoolean(servicioPublicadoDb.ENVIO),
+                            Precio = Convert.ToDouble(servicioPublicadoDb.PRECIO),
+                            ServFinDeSemana = Convert.ToBoolean(servicioPublicadoDb.FIN_DE_SEMANA),
+                            ServEntreSemana = Convert.ToBoolean(servicioPublicadoDb.ENTRE_SEMANA),
+                            MaxServPorDia = servicioPublicadoDb.CANT_SERV_DIARIOS
+                        };
+
+                        serviciosPublicados.Add(servicioPublicado);
+                    }
+
+                    return serviciosPublicados;
+                }
+            }
+            catch { throw; }
+        }
+
+        public List<ServicioPublicado> GetAllServicioPublicado(Guid idProveedor)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var serviciosPublicadosDb = ctx.SERVICIO_PUBLICADO.Where(S => S.ID_PROVEEDOR == idProveedor).ToList();
+
+                    var serviciosPublicados = new List<ServicioPublicado>();
+
+                    foreach (var servicioPublicadoDb in serviciosPublicadosDb)
+                    {
+                        var servicioPublicado = new ServicioPublicado
+                        {
+                            CodPublicacion = servicioPublicadoDb.ID_SERV_PUB,
+                            FechaPublicacion = servicioPublicadoDb.FECHA_PUBLICACION,
+                            Titulo = servicioPublicadoDb.NOMBRE,
+                            Descripcion = servicioPublicadoDb.DESCRIPCION,
+                            HaceEnvio = Convert.ToBoolean(servicioPublicadoDb.ENVIO),
+                            Precio = Convert.ToDouble(servicioPublicadoDb.PRECIO),
+                            ServFinDeSemana = Convert.ToBoolean(servicioPublicadoDb.FIN_DE_SEMANA),
+                            ServEntreSemana = Convert.ToBoolean(servicioPublicadoDb.ENTRE_SEMANA),
+                            MaxServPorDia = servicioPublicadoDb.CANT_SERV_DIARIOS
+                        };
+
+                        serviciosPublicados.Add(servicioPublicado);
+                    }
+
+                    return serviciosPublicados;
+                }
+            }
+            catch { throw; }
+        }
     }
 }

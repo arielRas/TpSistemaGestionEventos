@@ -40,13 +40,7 @@ namespace DAL
         [StringLength(100)]
         public string DIRECCION { get; set; }
 
-        [Required]
-        [MaxLength(32)]
-        public byte[] SALT { get; set; }
-
-        [Required]
-        [MaxLength(32)]
-        public byte[] PASSWORD { get; set; }
+        public virtual CREDENCIALES CREDENCIALES { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EVENTO> EVENTO { get; set; }

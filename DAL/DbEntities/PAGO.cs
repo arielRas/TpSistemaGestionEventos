@@ -6,8 +6,11 @@ namespace DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class EVENTO_PROVEEDOR_SERVICIO
+    [Table("PAGO")]
+    public partial class PAGO
     {
+        public Guid? ID_PAGO { get; set; }
+
         [Key]
         [Column(Order = 0)]
         public Guid ID_EVENTO { get; set; }
@@ -21,15 +24,9 @@ namespace DAL
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_SERVICIO { get; set; }
 
-        public int CANTIDAD { get; set; }
+        public DateTime FECHA_PAGO { get; set; }
 
-        public decimal PRECIO_UNITARIO { get; set; }
-
-        public decimal MONTO_TOTAL { get; set; }
-
-        public bool? PAGO { get; set; }
-
-        public bool? COMPLETADO { get; set; }
+        public decimal? MONTO { get; set; }
 
         public virtual EVENTO EVENTO { get; set; }
 

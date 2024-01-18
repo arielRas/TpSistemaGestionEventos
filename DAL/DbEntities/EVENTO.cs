@@ -14,6 +14,7 @@ namespace DAL
         {
             EVENTO_PROVEEDOR_SERVICIO = new HashSet<EVENTO_PROVEEDOR_SERVICIO>();
             INVITADO = new HashSet<INVITADO>();
+            PAGO = new HashSet<PAGO>();
         }
 
         [Key]
@@ -47,5 +48,8 @@ namespace DAL
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INVITADO> INVITADO { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PAGO> PAGO { get; set; }
     }
 }

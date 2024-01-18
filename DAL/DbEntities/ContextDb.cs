@@ -12,11 +12,13 @@ namespace DAL
         {
         }
 
+        public virtual DbSet<CREDENCIALES> CREDENCIALES { get; set; }
         public virtual DbSet<EVENTO> EVENTO { get; set; }
         public virtual DbSet<EVENTO_PROVEEDOR_SERVICIO> EVENTO_PROVEEDOR_SERVICIO { get; set; }
         public virtual DbSet<FECHA_RESERVADA> FECHA_RESERVADA { get; set; }
         public virtual DbSet<INVITADO> INVITADO { get; set; }
         public virtual DbSet<ORGANIZADOR> ORGANIZADOR { get; set; }
+        public virtual DbSet<PAGO> PAGO { get; set; }
         public virtual DbSet<PROVEEDOR> PROVEEDOR { get; set; }
         public virtual DbSet<PROVINCIA> PROVINCIA { get; set; }
         public virtual DbSet<SERVICIO> SERVICIO { get; set; }
@@ -46,13 +48,18 @@ namespace DAL
                 .WithRequired(e => e.EVENTO)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<EVENTO>()
+                .HasMany(e => e.PAGO)
+                .WithRequired(e => e.EVENTO)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<EVENTO_PROVEEDOR_SERVICIO>()
                 .Property(e => e.PRECIO_UNITARIO)
-                .HasPrecision(8, 2);
+                .HasPrecision(10, 2);
 
             modelBuilder.Entity<EVENTO_PROVEEDOR_SERVICIO>()
                 .Property(e => e.MONTO_TOTAL)
-                .HasPrecision(8, 2);
+                .HasPrecision(10, 2);
 
             modelBuilder.Entity<INVITADO>()
                 .Property(e => e.EMAIL)
@@ -87,9 +94,17 @@ namespace DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<ORGANIZADOR>()
+                .HasOptional(e => e.CREDENCIALES)
+                .WithRequired(e => e.ORGANIZADOR);
+
+            modelBuilder.Entity<ORGANIZADOR>()
                 .HasMany(e => e.EVENTO)
                 .WithRequired(e => e.ORGANIZADOR)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PAGO>()
+                .Property(e => e.MONTO)
+                .HasPrecision(10, 2);
 
             modelBuilder.Entity<PROVEEDOR>()
                 .Property(e => e.NOMBRE)
@@ -116,7 +131,16 @@ namespace DAL
                 .HasPrecision(4, 2);
 
             modelBuilder.Entity<PROVEEDOR>()
+                .HasOptional(e => e.CREDENCIALES)
+                .WithRequired(e => e.PROVEEDOR);
+
+            modelBuilder.Entity<PROVEEDOR>()
                 .HasMany(e => e.EVENTO_PROVEEDOR_SERVICIO)
+                .WithRequired(e => e.PROVEEDOR)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PROVEEDOR>()
+                .HasMany(e => e.PAGO)
                 .WithRequired(e => e.PROVEEDOR)
                 .WillCascadeOnDelete(false);
 
@@ -153,6 +177,11 @@ namespace DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SERVICIO>()
+                .HasMany(e => e.PAGO)
+                .WithRequired(e => e.SERVICIO)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SERVICIO>()
                 .HasMany(e => e.SERVICIO_PUBLICADO)
                 .WithRequired(e => e.SERVICIO)
                 .WillCascadeOnDelete(false);
@@ -167,7 +196,7 @@ namespace DAL
 
             modelBuilder.Entity<SERVICIO_PUBLICADO>()
                 .Property(e => e.PRECIO)
-                .HasPrecision(8, 2);
+                .HasPrecision(10, 2);
 
             modelBuilder.Entity<SERVICIO_PUBLICADO>()
                 .HasMany(e => e.FECHA_RESERVADA)
