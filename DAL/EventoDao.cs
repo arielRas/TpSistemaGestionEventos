@@ -124,6 +124,24 @@ namespace DAL
             catch { throw; }
         }
 
+        public List<Evento> GetAllEventos(Guid IdOrganizador)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var codEventos = ctx.EVENTO.Where(E => E.ID_ORGANIZADOR == IdOrganizador).Select(E => E.ID_EVENTO).ToList();
+
+                    var eventos = new List<Evento>();
+
+                    codEventos.ForEach(C => eventos.Add(GetEvento(C)));
+
+                    return eventos;
+                }
+            }
+            catch { throw; }
+        }
+
 
         public EventoPublic GetEventoPublic(Guid codEvento)
         {

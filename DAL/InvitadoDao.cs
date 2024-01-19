@@ -66,5 +66,34 @@ namespace DAL
             }
             catch { throw; }
         }
+
+        public List<Invitado> GetAllinvitados(Guid codEvento)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var invitadosDb = ctx.INVITADO.Where(I => I.ID_EVENTO == codEvento).ToList();
+
+                    var invitados = new List<Invitado>();
+
+                    foreach(var invitadoDb in invitadosDb)
+                    {
+                        var invitado = new Invitado
+                        {
+                            Nombre = invitadoDb.NOMBRE,
+                            Apellido = invitadoDb.APELLIDO,
+                            Email = invitadoDb.EMAIL,
+                            CantInvitados = invitadoDb.CANT_COMPANIONS
+                        };
+
+                        invitados.Add(invitado);
+                    }
+
+                    return invitados;
+                }
+            }
+            catch { throw; }
+        }
     }
 }

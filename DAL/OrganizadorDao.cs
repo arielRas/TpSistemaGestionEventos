@@ -59,13 +59,13 @@ namespace DAL
         }
 
 
-        public Organizador GetOrganizador(string email)
+        public Organizador GetOrganizador(Guid idOrganizador)
         {
             try
             {
                 using (ContextDb ctx = new ContextDb())
                 {
-                    var organizadorDb = ctx.ORGANIZADOR.SingleOrDefault(O => O.EMAIL == email) ?? throw new Exception("El usuario solicitado no existe");
+                    var organizadorDb = ctx.ORGANIZADOR.SingleOrDefault(O => O.ID_ORGANIZADOR == idOrganizador) ?? throw new Exception("El usuario solicitado no existe");
 
                     var organizador = new Organizador
                     {
