@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encrypt.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="FechaReservada.cs" />
     <Compile Include="Invitado.cs" />
