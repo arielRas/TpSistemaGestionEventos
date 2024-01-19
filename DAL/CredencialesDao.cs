@@ -62,5 +62,45 @@ namespace DAL
             }
             catch { throw; }
         }
+
+
+        public void AltaCredencial(Guid idUsuario, byte[] salt, byte[] hashedPassword)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var credencial = new CREDENCIALES
+                    {
+                        ID = idUsuario,
+                        SALT = salt,
+                        PASSWORD = hashedPassword
+                    };
+
+                    ctx.CREDENCIALES.Add(credencial);
+
+                    ctx.SaveChanges();
+                }
+            }
+            catch { throw; }
+        }
+
+        public void ActualizarCredencial(Guid idUsuario, byte[] salt, byte[] hashedPassword)
+        {
+            try
+            {
+                using (ContextDb ctx = new ContextDb())
+                {
+                    var credencial = ctx.CREDENCIALES.SingleOrDefault(C => C.ID == idUsuario) ?? throw new Exception("El usuario solicitado no existe");
+
+                    credencial.SALT = salt;
+
+                    credencial.PASSWORD = hashedPassword;
+
+                    ctx.SaveChanges();
+                }
+            }
+            catch { throw; }
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Business
 {
@@ -15,16 +16,31 @@ namespace Business
         private readonly EventoDao eventoDao = new EventoDao();
         private readonly ServicioContratadoDao servicioContratadoDao = new ServicioContratadoDao();
         private readonly InvitadoDao invitadoDao = new InvitadoDao();
+        private readonly CredencialesDao credencialesDao = new CredencialesDao();
+        private readonly Encrypt encrypt = new Encrypt();
        
 
-        public void AltaOrganizador(Organizador organizador)
+        public void AltaOrganizador(Organizador organizador, string password)
         {
             try
             {
-                if (ValidarDatos(organizador))
+                using(var transaction = new TransactionScope())
                 {
-                    organizadorDao.AltaOrganizador(organizador);
-                }
+                    if (ValidarDatos(organizador)) 
+                    {
+                        if (password.Length < 8) throw new Exception("El campo contraseña debe tener al menos 8 caraccteres");
+
+                        organizadorDao.AltaOrganizador(organizador);
+
+                        Guid nuevoId = credencialesDao.GetIdUsuario(organizador.Email, false);
+
+                        byte[] salt = encrypt.GenerateSalt();
+
+                        byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
+
+                        credencialesDao.AltaCredencial(nuevoId, salt, hashedPassword);
+                    }                 
+                }                    
             }
             catch { throw; }
         }
@@ -33,9 +49,9 @@ namespace Business
         {
             try
             {
-                if (ValidarDatos(organizador))
+                using(var transaction = new TransactionScope())
                 {
-                    organizadorDao.ActualizarOrganizador(organizador);
+                    if (ValidarDatos(organizador)) organizadorDao.ActualizarOrganizador(organizador);
                 }
             }
             catch { throw; }

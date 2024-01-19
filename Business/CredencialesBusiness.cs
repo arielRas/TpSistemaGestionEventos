@@ -33,5 +33,18 @@ namespace Business
             }
             catch { throw; }
         }
+
+        public void ActualizarCredenciales(Guid idUsuario, string NuevoPassword)
+        {
+            try
+            {
+                byte[] salt = encrypt.GenerateSalt();
+
+                byte[] hashedPassword = encrypt.GethashedPassword(NuevoPassword, salt);
+
+                credencialesDao.ActualizarCredencial(idUsuario, salt, hashedPassword);
+            }
+            catch { throw; }
+        }
     }
 }
