@@ -59,6 +59,7 @@
     <Compile Include="DbEntities\FECHA_RESERVADA.cs" />
     <Compile Include="DbEntities\INVITADO.cs" />
     <Compile Include="InvitadoDao.cs" />
+    <Compile Include="CredencialesDao.cs" />
     <Compile Include="DbEntities\ORGANIZADOR.cs" />
     <Compile Include="OrganizadorDao.cs" />
     <Compile Include="DbEntities\PAGO.cs" />
