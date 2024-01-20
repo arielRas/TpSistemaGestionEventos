@@ -45,7 +45,6 @@
     <Compile Include="Evento.cs" />
     <Compile Include="FechaReservada.cs" />
     <Compile Include="Invitado.cs" />
-    <Compile Include="ISystemUser.cs" />
     <Compile Include="Organizador.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="Persona.cs" />
@@ -55,6 +54,7 @@
     <Compile Include="Servicio.cs" />
     <Compile Include="ServicioContratado.cs" />
     <Compile Include="ServicioPublicado.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

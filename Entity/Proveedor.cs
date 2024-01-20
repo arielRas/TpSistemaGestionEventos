@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Proveedor : Persona, ISystemUser
+    public class Proveedor : Usuario
     {
         //ATRIBUTOS        
         private float puntaje;      
@@ -14,12 +14,6 @@ namespace Entity
         private List<ServicioContratado>serviciosPorCumplir = new List<ServicioContratado>();
 
         //PROPIEDADES
-
-        public Guid Id { get; set; }
-        public Int64 Dni { get; set; }
-        public string Provincia { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
         public float Puntaje { get => puntaje; set => puntaje = value; }
         public List<ServicioPublicado> ServiciosPublicados { get => serviciosPublicados; set => serviciosPublicados = value; }
         public List<ServicioContratado> ServiciosPorCumplir { get => serviciosPorCumplir; set => serviciosPorCumplir = value; }
