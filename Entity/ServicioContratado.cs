@@ -11,7 +11,7 @@ namespace Entity
         //ATRIBUTOS
         private Persona proveedor;
         private Persona organizador;
-        private Servicio servicio;
+        private Servicio servicioBrindado;
         private int cantidad;
         private double precioPorUnidad;
         private double montoTotal;
@@ -22,7 +22,7 @@ namespace Entity
         //PROPIEDADES
         public Persona Proveedor { get => proveedor; set => proveedor = value; }
         public Persona Organizador { get => organizador; set => organizador = value; }
-        public Servicio Servicio { get => servicio; set => servicio = value; }
+        public Servicio ServicioBrindado { get => servicioBrindado; set => servicioBrindado = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public double PrecioPorUnidad { get => precioPorUnidad; set => precioPorUnidad = value; }
         public double MontoTotal { get => montoTotal; set => montoTotal = value; }

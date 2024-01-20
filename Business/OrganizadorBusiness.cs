@@ -70,7 +70,7 @@ namespace Business
         {
             try
             {
-                return servicioContratadoDao.GetAllServiciosContratados(codEvento);
+                return servicioContratadoDao.ListarServiciosContratados(codEvento);
             }
             catch { throw; }
         }

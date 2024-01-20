@@ -46,12 +46,13 @@ namespace Business
 
                 if (ValidarDatos(usuario))
                 {
+
+                    byte[] salt = encrypt.GenerateSalt();
+
+                    byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
+
                     using (var transaction = new TransactionScope())
                     {
-                        byte[] salt = encrypt.GenerateSalt();
-
-                        byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
-
                         usuarioDao.AltaUsuario(usuario, salt, hashedPassword, esProveedor);
 
                         transaction.Complete();
@@ -70,7 +71,12 @@ namespace Business
 
                 byte[] hashedPassword = encrypt.GethashedPassword(NuevoPassword, salt);
 
-                credencialesDao.ActualizarCredencial(idUsuario, salt, hashedPassword);
+                using (var transaction = new TransactionScope())
+                {
+                    credencialesDao.ActualizarCredencial(idUsuario, salt, hashedPassword);
+
+                    transaction.Complete();
+                }                
             }
             catch { throw; }
         }

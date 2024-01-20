@@ -10,12 +10,41 @@ namespace Business
 {
     public class ProveedorBusiness
     {
-        private readonly OrganizadorDao organizadorDao = new OrganizadorDao();
+        private readonly ProveedorDao proveedorDao = new ProveedorDao();
+        private readonly ServicioPublicadoDao servPublDao = new ServicioPublicadoDao();
+        private readonly ServicioContratadoDao servContrDao = new ServicioContratadoDao();
+        private readonly FechaReservadaDao fechaReservadaDao = new FechaReservadaDao(); 
         private readonly EventoDao eventoDao = new EventoDao();
-        private readonly ServicioContratadoDao servicioContratadoDao = new ServicioContratadoDao();
-        private readonly InvitadoDao invitadoDao = new InvitadoDao();
-        private readonly CredencialesDao credencialesDao = new CredencialesDao();
-        private readonly Encrypt encrypt = new Encrypt();
-        
+
+        private List<ServicioPublicado> ListarServiciosPublicados(Guid idProveedor)
+        {
+            try
+            {
+                return servPublDao.GetAllServicioPublicado(idProveedor);
+            }
+            catch { throw; }
+        }
+
+
+        private List<Guid> ListarEventosPorCumplir(Guid idProveedor)
+        {
+            try
+            {
+                return servContrDao.ListarEventosPorCumplir(idProveedor);
+            }
+            catch { throw; }
+        }
+
+
+        private List<ServicioContratado> ListarServiciosPorCumplir(List<Guid> codEventos)
+        {
+            try
+            {
+                var serviciosPorCumplir = new List<ServicioContratado>();
+
+                codEventos.ForEach(C => serviciosPorCumplir.Add(servContrDao.ListarServiciosContratados(C)))
+            }
+            catch { throw; }
+        }
     }
 }

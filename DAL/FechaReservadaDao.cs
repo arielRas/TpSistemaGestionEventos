@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class FechaReservadaDao
+    public class FechaReservadaDao
     {                
         public bool ExisteFechaReservada(Guid codPublicacion, DateTime fecha)
         {
