@@ -13,7 +13,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     if (esProveedor) return ctx.PROVEEDOR.Any(P => P.EMAIL == email);
 
@@ -27,7 +27,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     return ctx.CREDENCIALES.Any(C => C.ID == idUsuario && C.PASSWORD == password);
                 }
@@ -39,7 +39,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     if(esProveedor) return ctx.PROVEEDOR.Where(P => P.EMAIL == email).Select(P => P.ID_PROVEEDOR).FirstOrDefault();
 
@@ -53,11 +53,51 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     byte[] salt = ctx.CREDENCIALES.Where(C => C.ID == idUsuario).Select(C => C.SALT).FirstOrDefault() ?? throw new Exception("El usuario no existe");
                     
                     return salt;
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public void AltaCredencial(Guid idUsuario, byte[] salt, byte[] hashedPassword)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    var credencial = new CREDENCIALES
+                    {
+                        ID = idUsuario,
+                        SALT = salt,
+                        PASSWORD = hashedPassword
+                    };
+
+                    ctx.CREDENCIALES.Add(credencial);
+
+                    ctx.SaveChanges();
+                }
+            }
+            catch { throw; }
+        }
+
+        public void ActualizarCredencial(Guid idUsuario, byte[] salt, byte[] hashedPassword)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    var credencial = ctx.CREDENCIALES.SingleOrDefault(C => C.ID == idUsuario) ?? throw new Exception("El usuario solicitado no existe");
+
+                    credencial.SALT = salt;
+
+                    credencial.PASSWORD = hashedPassword;
+
+                    ctx.SaveChanges();
                 }
             }
             catch { throw; }

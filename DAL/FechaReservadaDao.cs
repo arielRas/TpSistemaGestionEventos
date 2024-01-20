@@ -14,7 +14,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     return ctx.FECHA_RESERVADA.Any(F => F.ID_SERV_PUB == codPublicacion && F.FECHA == fecha.Date);
                 }
@@ -27,7 +27,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     return ctx.FECHA_RESERVADA.Any(F => F.ID_SERV_PUB == codPublicacion);
                 }
@@ -40,7 +40,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var fechaReservadaDb = ctx.FECHA_RESERVADA.SingleOrDefault(F => F.ID_SERV_PUB == codPublicacion && F.FECHA == fecha.Date) 
                         ?? throw new Exception("No se encuentra la fecha indicada");
@@ -62,7 +62,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var fechasReservadasDb = ctx.FECHA_RESERVADA.Where(F => F.ID_SERV_PUB == codPublicacion).ToList();
 
@@ -90,7 +90,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var fechaReservadaDb = new FECHA_RESERVADA
                     {
@@ -108,7 +108,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var fechaReservadaDb = ctx.FECHA_RESERVADA.SingleOrDefault(F => F.ID_SERV_PUB == codPublicacion && F.FECHA == fechaReservada.Fecha.Date)
                         ?? throw new Exception("No se encuentra la fecha indicada");

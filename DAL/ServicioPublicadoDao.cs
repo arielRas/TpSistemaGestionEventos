@@ -13,7 +13,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var servicioPublicadoDb = new SERVICIO_PUBLICADO
                     {
@@ -37,7 +37,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var serviciosPublicadosDb = ctx.SERVICIO_PUBLICADO.ToList();
 
@@ -71,7 +71,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var serviciosPublicadosDb = ctx.SERVICIO_PUBLICADO.Where(S => S.ID_PROVEEDOR == idProveedor).ToList();
 

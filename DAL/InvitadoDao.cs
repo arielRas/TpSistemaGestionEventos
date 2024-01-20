@@ -13,7 +13,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadoDb = new INVITADO
                     {
@@ -36,7 +36,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadoDb = ctx.INVITADO.SingleOrDefault(I => I.ID_EVENTO == codEvento && I.EMAIL == invitado.Email) ?? throw new Exception("No se encuentra el invitado indicado");
 
@@ -55,13 +55,42 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadoDb = ctx.INVITADO.SingleOrDefault(I => I.ID_EVENTO == codEvento && I.EMAIL == email) ?? throw new Exception("No se encuentra el invitado indicado");
 
                     ctx.INVITADO.Remove(invitadoDb);
 
                     ctx.SaveChanges();
+                }
+            }
+            catch { throw; }
+        }
+
+        public List<Invitado> GetAllinvitados(Guid codEvento)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    var invitadosDb = ctx.INVITADO.Where(I => I.ID_EVENTO == codEvento).ToList();
+
+                    var invitados = new List<Invitado>();
+
+                    foreach(var invitadoDb in invitadosDb)
+                    {
+                        var invitado = new Invitado
+                        {
+                            Nombre = invitadoDb.NOMBRE,
+                            Apellido = invitadoDb.APELLIDO,
+                            Email = invitadoDb.EMAIL,
+                            CantInvitados = invitadoDb.CANT_COMPANIONS
+                        };
+
+                        invitados.Add(invitado);
+                    }
+
+                    return invitados;
                 }
             }
             catch { throw; }

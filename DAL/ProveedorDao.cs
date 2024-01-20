@@ -15,7 +15,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var proveedorDb = new PROVEEDOR
                     {
@@ -40,7 +40,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var proveedorDb = ctx.PROVEEDOR.SingleOrDefault(P => P.EMAIL == email) ?? throw new Exception("El usuario solicitado no existe");
 
@@ -67,7 +67,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var proveedorDb = ctx.PROVEEDOR.SingleOrDefault(P => P.ID_PROVEEDOR == proveedor.Id) ?? throw new Exception("El usuario solicitado no existe");
 

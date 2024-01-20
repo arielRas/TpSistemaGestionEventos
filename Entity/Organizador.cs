@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Organizador : Persona, ISystemUser
+    public class Organizador : Usuario
     {
         //ATRIBUTOS        
         private List<Evento> eventos = new List<Evento>();
       
 
-        //PROPIEDADES
-        public Guid Id { get; set; }
-        public Int64 Dni { get; set; }
-        public string Provincia { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }        
-        public List<Evento> Eventos { get => eventos; set => eventos = value; }
+        //PROPIEDADES           
+        public List<Evento> Eventos { get => eventos; set => eventos = value; }        
     }
 }

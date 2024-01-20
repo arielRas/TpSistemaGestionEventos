@@ -12,7 +12,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var provinciaDb = ctx.PROVINCIA.SingleOrDefault(P => P.ID_PROVINCIA == idProvincia) ?? throw new ArgumentException("No se encuentra la provincia indicada");
 
@@ -26,7 +26,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {                    
                     var provinciaDb = ctx.PROVINCIA.SingleOrDefault(P => P.NOMBRE == provincia) ?? throw new ArgumentException("No se encuentra la provincia indicada");
 

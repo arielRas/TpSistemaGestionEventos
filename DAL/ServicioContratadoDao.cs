@@ -13,7 +13,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var serviciosContratadosDb = ctx.EVENTO_PROVEEDOR_SERVICIO.Where(E => E.ID_EVENTO == codEvento).ToList();
 
