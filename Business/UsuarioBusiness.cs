@@ -3,6 +3,7 @@ using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -14,10 +15,9 @@ namespace Business
 {
     public class UsuarioBusiness
     {
+        private readonly UsuarioDao usuarioDao = new UsuarioDao();
         private readonly CredencialesDao credencialesDao = new CredencialesDao();
         private readonly Encrypt encrypt = new Encrypt();
-        //private readonly OrganizadorDao organizadorDao = new OrganizadorDao();
-        //private readonly ProveedorDao proveedorDao = new ProveedorDao();
 
         public bool ValidarCredenciales(string email, string password, bool esProveedor)
         {
@@ -38,6 +38,30 @@ namespace Business
             catch { throw; }
         }
 
+        public void AltaUsuario(Usuario usuario, string password, bool esProveedor)
+        {
+            try
+            {
+                if (password.Length < 8) throw new Exception("El campo contraseña debe tener al menos 8 caraccteres");
+
+                if (ValidarDatos(usuario))
+                {
+                    using (var transaction = new TransactionScope())
+                    {
+                        byte[] salt = encrypt.GenerateSalt();
+
+                        byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
+
+                        usuarioDao.AltaUsuario(usuario, salt, hashedPassword, esProveedor);
+
+                        transaction.Complete();
+                    }
+                }
+            }
+            catch { throw; }
+        }
+
+
         public void ActualizarCredenciales(Guid idUsuario, string NuevoPassword)
         {
             try
@@ -50,43 +74,7 @@ namespace Business
             }
             catch { throw; }
         }
-
-        public void AltaUsuario(Usuario usuario, string password, bool esProveedor)
-        {
-            try
-            {
-                if (password.Length < 8) throw new Exception("El campo contraseña debe tener al menos 8 caraccteres");
-
-                if (ValidarDatos(usuario))
-                {
-                    using (var transaction = new TransactionScope())
-                    {
-                        if (usuario is Organizador)
-                        {
-                            var organizadorDao = new OrganizadorDao();
-
-                            organizadorDao.AltaOrganizador((usuario as Organizador));
-                        }
-                        else
-                        {
-                            var proveedorDao = new ProveedorDao();
-
-                            if (usuario is Proveedor) proveedorDao.AltaProveedor((usuario as Proveedor));
-                        }
-
-                        //ESTE METODO LEE EL ID QUE FUE CREADO CON PROVEEDOR U ORGANIZADOR
-                        Guid nuevoId = credencialesDao.GetIdUsuario(usuario.Email, esProveedor);
-
-                        byte[] salt = encrypt.GenerateSalt();
-
-                        byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
-
-                        credencialesDao.AltaCredencial(nuevoId, salt, hashedPassword);
-                    }
-                }                 
-            }
-            catch { throw; }
-        }
+        
 
         private bool ValidarDatos(Usuario usuario)
         {

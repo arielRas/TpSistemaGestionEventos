@@ -109,6 +109,7 @@
     <Compile Include="SERVICIO_PUBLICADO.cs">
       <DependentUpon>ContextDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">

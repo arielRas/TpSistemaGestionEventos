@@ -16,36 +16,8 @@ namespace Business
         private readonly EventoDao eventoDao = new EventoDao();
         private readonly ServicioContratadoDao servicioContratadoDao = new ServicioContratadoDao();
         private readonly InvitadoDao invitadoDao = new InvitadoDao();
-        private readonly CredencialesDao credencialesDao = new CredencialesDao();
-        private readonly Encrypt encrypt = new Encrypt();
        
-
-        public void AltaOrganizador(Organizador organizador, string password)
-        {
-            try
-            {
-                using(var transaction = new TransactionScope())
-                {
-                    if (ValidarDatos(organizador)) 
-                    {
-                        if (password.Length < 8) throw new Exception("El campo contraseña debe tener al menos 8 caraccteres");
-
-                        organizadorDao.AltaOrganizador(organizador);
-
-                        Guid nuevoId = credencialesDao.GetIdUsuario(organizador.Email, false);
-
-                        byte[] salt = encrypt.GenerateSalt();
-
-                        byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
-
-                        credencialesDao.AltaCredencial(nuevoId, salt, hashedPassword);
-                    }                 
-                }                    
-            }
-            catch { throw; }
-        }
-
-        public void ActualizarOrganzador(Organizador organizador)
+        public void ActualizarOrganizador(Organizador organizador)
         {
             try
             {
@@ -56,33 +28,6 @@ namespace Business
             }
             catch { throw; }
         }
-
-
-        private bool ValidarDatos(Organizador organizador)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(organizador.Nombre)) throw new Exception("El campo nombre no puede estar vacio");
-
-                if (string.IsNullOrEmpty(organizador.Apellido)) throw new Exception("El campo apellido no puede estar vacio");
-
-                if (string.IsNullOrEmpty(organizador.Provincia)) throw new Exception("El campo provincia no puede estar vacio");
-
-                if (string.IsNullOrEmpty(organizador.Direccion)) throw new Exception("El campo direccion no puede estar vacio");
-
-                if (string.IsNullOrEmpty(organizador.Email)) throw new Exception("El campo email no puede estar vacio");
-
-                if (!Regex.IsMatch(organizador.Telefono, @"^\d+")) throw new Exception("El campo telefono solo admite campos numericos");
-
-                if (Regex.IsMatch(organizador.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")) throw new Exception("El campo email no tiene formato valido");
-
-                if (organizador.Dni.ToString().Length != 8) throw new Exception("El campo de DNI debe tener 8 caracteres");
-
-                return true;
-            }
-            catch { throw; }
-        }
-
 
         public Organizador GetOrganizador(Guid idOrganizador)
         {
@@ -135,6 +80,32 @@ namespace Business
             try
             {
                 return invitadoDao.GetAllinvitados(CodEvento);
+            }
+            catch { throw; }
+        }
+
+
+        private bool ValidarDatos(Organizador organizador)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(organizador.Nombre)) throw new Exception("El campo nombre no puede estar vacio");
+
+                if (string.IsNullOrEmpty(organizador.Apellido)) throw new Exception("El campo apellido no puede estar vacio");
+
+                if (string.IsNullOrEmpty(organizador.Provincia)) throw new Exception("El campo provincia no puede estar vacio");
+
+                if (string.IsNullOrEmpty(organizador.Direccion)) throw new Exception("El campo direccion no puede estar vacio");
+
+                if (string.IsNullOrEmpty(organizador.Email)) throw new Exception("El campo email no puede estar vacio");
+
+                if (!Regex.IsMatch(organizador.Telefono, @"^\d+")) throw new Exception("El campo telefono solo admite campos numericos");
+
+                if (Regex.IsMatch(organizador.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")) throw new Exception("El campo email no tiene formato valido");
+
+                if (organizador.Dni.ToString().Length != 8) throw new Exception("El campo de DNI debe tener 8 caracteres");
+
+                return true;
             }
             catch { throw; }
         }

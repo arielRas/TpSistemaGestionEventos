@@ -9,33 +9,7 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public class OrganizadorDao
-    {
-        public void AltaOrganizador(Organizador organizador)
-        {
-            try
-            {
-                using(DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    var organizadorDb = new ORGANIZADOR
-                    {
-                        NOMBRE = organizador.Nombre,
-                        APELLIDO = organizador.Apellido,
-                        EMAIL = organizador.Email,
-                        DNI = organizador.Dni,
-                        TELEFONO = organizador.Telefono,
-                        ID_PROVINCIA = ProvinciaDao.GetIdProvincia(organizador.Provincia),
-                        DIRECCION = organizador.Direccion
-                    };
-
-                    ctx.ORGANIZADOR.Add(organizadorDb);
-
-                    ctx.SaveChanges();
-                }
-            }
-            catch { throw; }
-        }
-
-
+    {        
         public void ActualizarOrganizador(Organizador organizador)
         {
             try

@@ -16,9 +16,6 @@ namespace Business
         private readonly InvitadoDao invitadoDao = new InvitadoDao();
         private readonly CredencialesDao credencialesDao = new CredencialesDao();
         private readonly Encrypt encrypt = new Encrypt();
-        public Proveedor GetProveedor()
-        {
-
-        }
+        
     }
 }

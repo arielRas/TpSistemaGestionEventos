@@ -12,6 +12,8 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DbGestionEventos : DbContext
     {
@@ -36,5 +38,50 @@ namespace DAL
         public virtual DbSet<PROVINCIA> PROVINCIA { get; set; }
         public virtual DbSet<SERVICIO> SERVICIO { get; set; }
         public virtual DbSet<SERVICIO_PUBLICADO> SERVICIO_PUBLICADO { get; set; }
+    
+        public virtual int SP_NUEVO_USUARIO(string nombre, string apellido, string email, Nullable<int> idProvincia, string direccion, string telefono, Nullable<long> dni, Nullable<bool> esProveedor, byte[] salt, byte[] password)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("apellido", apellido) :
+                new ObjectParameter("apellido", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var idProvinciaParameter = idProvincia.HasValue ?
+                new ObjectParameter("idProvincia", idProvincia) :
+                new ObjectParameter("idProvincia", typeof(int));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("direccion", direccion) :
+                new ObjectParameter("direccion", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var dniParameter = dni.HasValue ?
+                new ObjectParameter("dni", dni) :
+                new ObjectParameter("dni", typeof(long));
+    
+            var esProveedorParameter = esProveedor.HasValue ?
+                new ObjectParameter("esProveedor", esProveedor) :
+                new ObjectParameter("esProveedor", typeof(bool));
+    
+            var saltParameter = salt != null ?
+                new ObjectParameter("salt", salt) :
+                new ObjectParameter("salt", typeof(byte[]));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_NUEVO_USUARIO", nombreParameter, apellidoParameter, emailParameter, idProvinciaParameter, direccionParameter, telefonoParameter, dniParameter, esProveedorParameter, saltParameter, passwordParameter);
+        }
     }
 }

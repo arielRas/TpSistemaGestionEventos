@@ -10,32 +10,7 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public class ProveedorDao
-    {
-        public void AltaProveedor(Proveedor proveedor)
-        {
-            try
-            {
-                using(DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    var proveedorDb = new PROVEEDOR
-                    {
-                        NOMBRE = proveedor.Nombre,
-                        APELLIDO = proveedor.Apellido,
-                        EMAIL = proveedor.Email,
-                        DNI = proveedor.Dni,
-                        TELEFONO = proveedor.Telefono,
-                        ID_PROVINCIA = ProvinciaDao.GetIdProvincia(proveedor.Provincia),
-                        DIRECCION = proveedor.Direccion                        
-                    };
-
-                    ctx.PROVEEDOR.Add(proveedorDb);
-                    ctx.SaveChanges();
-                }
-            }
-            catch { throw; }
-        }
-
-
+    {    
         public Proveedor GetProveedor(string email)
         {
             try
