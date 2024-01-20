@@ -13,7 +13,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var serviciosDb = ctx.SERVICIO.ToList();
 

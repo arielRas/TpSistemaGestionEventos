@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1b261ef32a4a43f48f041d6493c71856" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="DbGestionEventosModel.CREDENCIALES" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.EVENTO" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.EVENTO_PROVEEDOR_SERVICIO" Width="1.5" PointX="7.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.FECHA_RESERVADA" Width="1.5" PointX="7.5" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.INVITADO" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.ORGANIZADOR" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.PAGO" Width="1.5" PointX="10.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.PROVEEDOR" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.PROVINCIA" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.SERVICIO" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbGestionEventosModel.SERVICIO_PUBLICADO" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_CREDENCIALES_ORGANIZADOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_CREDENCIALES_PROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_EVENTO_ORGANIZADOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_EVENTO_PROVEEDOR_SERVICIO_EVENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_EVENTO_PROVINCIA" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_INVITADO_EVENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_PAGO_EVENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_EVENTO_PROVEEDOR_SERVICIO_PROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_EVENTO_PROVEEDOR_SERVICIO_SERVICIO" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_FECHA_RESERVADA_SERVICIO_PUBLICADO" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_ORGANIZADOR_PROVINCIA" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_PAGO_PROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_PAGO_SERVICIO" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_PROVEEDOR_PROVINCIA" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_SERVICIO_PUBLICADO_PROVEEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DbGestionEventosModel.FK_SERVICIO_PUBLICADO_SERVICIO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

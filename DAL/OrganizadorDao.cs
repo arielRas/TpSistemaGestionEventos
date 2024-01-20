@@ -14,7 +14,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var organizadorDb = new ORGANIZADOR
                     {
@@ -40,7 +40,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var organizadorDb = ctx.ORGANIZADOR.SingleOrDefault(O => O.ID_ORGANIZADOR == organizador.Id) ?? throw new Exception("El usuario solicitado no existe");
 
@@ -63,7 +63,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var organizadorDb = ctx.ORGANIZADOR.SingleOrDefault(O => O.ID_ORGANIZADOR == idOrganizador) ?? throw new Exception("El usuario solicitado no existe");
 

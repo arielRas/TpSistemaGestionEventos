@@ -50,29 +50,65 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbEntities\ContextDb.cs" />
-    <Compile Include="DbEntities\CREDENCIALES.cs" />
-    <Compile Include="DbEntities\EVENTO.cs" />
+    <Compile Include="ContextDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContextDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContextDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContextDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContextDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CREDENCIALES.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EVENTO.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="EventoDao.cs" />
-    <Compile Include="DbEntities\EVENTO_PROVEEDOR_SERVICIO.cs" />
+    <Compile Include="EVENTO_PROVEEDOR_SERVICIO.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="FechaReservadaDao.cs" />
-    <Compile Include="DbEntities\FECHA_RESERVADA.cs" />
-    <Compile Include="DbEntities\INVITADO.cs" />
+    <Compile Include="FECHA_RESERVADA.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INVITADO.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="InvitadoDao.cs" />
     <Compile Include="CredencialesDao.cs" />
-    <Compile Include="DbEntities\ORGANIZADOR.cs" />
+    <Compile Include="ORGANIZADOR.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrganizadorDao.cs" />
-    <Compile Include="DbEntities\PAGO.cs" />
+    <Compile Include="PAGO.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DbEntities\PROVEEDOR.cs" />
+    <Compile Include="PROVEEDOR.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProveedorDao.cs" />
-    <Compile Include="DbEntities\PROVINCIA.cs" />
+    <Compile Include="PROVINCIA.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProvinciaDao.cs" />
-    <Compile Include="DbEntities\SERVICIO.cs" />
+    <Compile Include="SERVICIO.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="ServicioContratadoDao.cs" />
     <Compile Include="ServicioDao.cs" />
     <Compile Include="ServicioPublicadoDao.cs" />
-    <Compile Include="DbEntities\SERVICIO_PUBLICADO.cs" />
+    <Compile Include="SERVICIO_PUBLICADO.cs">
+      <DependentUpon>ContextDb.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
@@ -80,10 +116,32 @@
       <Name>Entity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ContextDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ContextDb.edmx</DependentUpon>
+      <LastGenOutput>ContextDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ContextDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ContextDb.edmx</DependentUpon>
+      <LastGenOutput>ContextDb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="ContextDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ContextDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ContextDb.edmx.diagram">
+      <DependentUpon>ContextDb.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

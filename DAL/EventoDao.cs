@@ -14,7 +14,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     return ctx.EVENTO.Any(E => E.ID_EVENTO == codEvento);
                 }
@@ -27,7 +27,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     return ctx.EVENTO.Any(E => E.ID_ORGANIZADOR == codOrganizador);
                 }
@@ -40,7 +40,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var eventoDb = new EVENTO
                     {
@@ -66,7 +66,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     Guid idNuevoEvento = ctx.EVENTO.Where(E => E.ID_ORGANIZADOR == codOrganizador).OrderByDescending(E => E.FECHA_HORA).Select(E => E.ID_EVENTO).FirstOrDefault();
 
@@ -81,7 +81,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var eventoDb = ctx.EVENTO.SingleOrDefault(E => E.ID_EVENTO == evento.CodigoEvento) ?? throw new Exception("No se encuentra el evento indicado");
 
@@ -103,7 +103,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var eventoDb = ctx.EVENTO.SingleOrDefault(E => E.ID_EVENTO == codEvento) ?? throw new ArgumentException("No se encuentra el evento indicado");
 
@@ -128,7 +128,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var codEventos = ctx.EVENTO.Where(E => E.ID_ORGANIZADOR == IdOrganizador).Select(E => E.ID_EVENTO).ToList();
 
@@ -147,7 +147,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var eventoDb = ctx.EVENTO.SingleOrDefault(E => E.ID_EVENTO == codEvento) ?? throw new Exception("No se encuentra el evento indicado");
 
@@ -171,7 +171,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var eventosDb = ctx.EVENTO.Where(E => E.ID_ORGANIZADOR == codOrganizador).ToList();
 

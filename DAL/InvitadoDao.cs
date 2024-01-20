@@ -13,7 +13,7 @@ namespace DAL
         {
             try
             {
-                using(ContextDb ctx = new ContextDb())
+                using(DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadoDb = new INVITADO
                     {
@@ -36,7 +36,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadoDb = ctx.INVITADO.SingleOrDefault(I => I.ID_EVENTO == codEvento && I.EMAIL == invitado.Email) ?? throw new Exception("No se encuentra el invitado indicado");
 
@@ -55,7 +55,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadoDb = ctx.INVITADO.SingleOrDefault(I => I.ID_EVENTO == codEvento && I.EMAIL == email) ?? throw new Exception("No se encuentra el invitado indicado");
 
@@ -71,7 +71,7 @@ namespace DAL
         {
             try
             {
-                using (ContextDb ctx = new ContextDb())
+                using (DbGestionEventos ctx = new DbGestionEventos())
                 {
                     var invitadosDb = ctx.INVITADO.Where(I => I.ID_EVENTO == codEvento).ToList();
 
