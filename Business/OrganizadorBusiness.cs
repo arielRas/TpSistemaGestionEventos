@@ -62,6 +62,7 @@ namespace Business
             catch { throw; }
         }
 
+
         private bool HayEventos(Guid idOrganizador)
         {
             try

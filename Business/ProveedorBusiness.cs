@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Business
 {
@@ -17,6 +19,19 @@ namespace Business
         private readonly FechaReservadaDao fechaReservadaDao = new FechaReservadaDao();
         private readonly UsuarioDao usuarioDao = new UsuarioDao();
         private readonly EventoDao eventoDao = new EventoDao();
+
+
+        public void ActualizarProveedor(Proveedor proveedor)
+        {
+            try
+            {
+                using (var transaction = new TransactionScope())
+                {
+                    if (ValidarDatos(proveedor)) proveedorDao.ActualizarProveedor(proveedor);
+                }
+            }
+            catch { throw; }
+        }
 
 
         public Proveedor GetProveedor(Guid idProveedor)
@@ -139,6 +154,32 @@ namespace Business
             try
             {
                 return fechaReservadaDao.ListarFechasReservadas(codPublicacion);
+            }
+            catch { throw; }
+        }
+
+
+        private bool ValidarDatos(Proveedor proveedor)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(proveedor.Nombre)) throw new Exception("El campo nombre no puede estar vacio");
+
+                if (string.IsNullOrEmpty(proveedor.Apellido)) throw new Exception("El campo apellido no puede estar vacio");
+
+                if (string.IsNullOrEmpty(proveedor.Provincia)) throw new Exception("El campo provincia no puede estar vacio");
+
+                if (string.IsNullOrEmpty(proveedor.Direccion)) throw new Exception("El campo direccion no puede estar vacio");
+
+                if (string.IsNullOrEmpty(proveedor.Email)) throw new Exception("El campo email no puede estar vacio");
+
+                if (!Regex.IsMatch(proveedor.Telefono, @"^\d+")) throw new Exception("El campo telefono solo admite campos numericos");
+
+                if (Regex.IsMatch(proveedor.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")) throw new Exception("El campo email no tiene formato valido");
+
+                if (proveedor.Dni.ToString().Length != 8) throw new Exception("El campo de DNI debe tener 8 caracteres");
+
+                return true;
             }
             catch { throw; }
         }
