@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbGestionEventosModelStoreContainer" CdmEntityContainer="DbGestionEventos">
+    <EntitySetMapping Name="CREDENCIALES">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.CREDENCIALES">
+        <MappingFragment StoreEntitySet="CREDENCIALES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SALT" ColumnName="SALT" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EVENTO">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.EVENTO">
+        <MappingFragment StoreEntitySet="EVENTO">
+          <ScalarProperty Name="ID_EVENTO" ColumnName="ID_EVENTO" />
+          <ScalarProperty Name="ID_ORGANIZADOR" ColumnName="ID_ORGANIZADOR" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="FECHA_HORA" ColumnName="FECHA_HORA" />
+          <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="CANT_INVITADOS" ColumnName="CANT_INVITADOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EVENTO_PROVEEDOR_SERVICIO">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.EVENTO_PROVEEDOR_SERVICIO">
+        <MappingFragment StoreEntitySet="EVENTO_PROVEEDOR_SERVICIO">
+          <ScalarProperty Name="ID_EVENTO" ColumnName="ID_EVENTO" />
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="PRECIO_UNITARIO" ColumnName="PRECIO_UNITARIO" />
+          <ScalarProperty Name="MONTO_TOTAL" ColumnName="MONTO_TOTAL" />
+          <ScalarProperty Name="PAGO" ColumnName="PAGO" />
+          <ScalarProperty Name="COMPLETADO" ColumnName="COMPLETADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FECHA_RESERVADA">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.FECHA_RESERVADA">
+        <MappingFragment StoreEntitySet="FECHA_RESERVADA">
+          <ScalarProperty Name="ID_SERV_PUB" ColumnName="ID_SERV_PUB" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="CANT_RESERVAS" ColumnName="CANT_RESERVAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVITADO">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.INVITADO">
+        <MappingFragment StoreEntitySet="INVITADO">
+          <ScalarProperty Name="ID_EVENTO" ColumnName="ID_EVENTO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+          <ScalarProperty Name="CANT_COMPANIONS" ColumnName="CANT_COMPANIONS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORGANIZADOR">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.ORGANIZADOR">
+        <MappingFragment StoreEntitySet="ORGANIZADOR">
+          <ScalarProperty Name="ID_ORGANIZADOR" ColumnName="ID_ORGANIZADOR" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAGO">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.PAGO">
+        <MappingFragment StoreEntitySet="PAGO">
+          <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
+          <ScalarProperty Name="ID_EVENTO" ColumnName="ID_EVENTO" />
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+          <ScalarProperty Name="FECHA_PAGO" ColumnName="FECHA_PAGO" />
+          <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROVEEDOR">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.PROVEEDOR">
+        <MappingFragment StoreEntitySet="PROVEEDOR">
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="PUNTAJE" ColumnName="PUNTAJE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROVINCIA">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.PROVINCIA">
+        <MappingFragment StoreEntitySet="PROVINCIA">
+          <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SERVICIO">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.SERVICIO">
+        <MappingFragment StoreEntitySet="SERVICIO">
+          <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+          <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SERVICIO_PUBLICADO">
+      <EntityTypeMapping TypeName="DbGestionEventosModel.SERVICIO_PUBLICADO">
+        <MappingFragment StoreEntitySet="SERVICIO_PUBLICADO">
+          <ScalarProperty Name="ID_SERV_PUB" ColumnName="ID_SERV_PUB" />
+          <ScalarProperty Name="FECHA_PUBLICACION" ColumnName="FECHA_PUBLICACION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+          <ScalarProperty Name="ENVIO" ColumnName="ENVIO" />
+          <ScalarProperty Name="FIN_DE_SEMANA" ColumnName="FIN_DE_SEMANA" />
+          <ScalarProperty Name="ENTRE_SEMANA" ColumnName="ENTRE_SEMANA" />
+          <ScalarProperty Name="CANT_SERV_DIARIOS" ColumnName="CANT_SERV_DIARIOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_NUEVO_USUARIO" FunctionName="DbGestionEventosModel.Store.SP_NUEVO_USUARIO" />
+  </EntityContainerMapping>
+</Mapping>

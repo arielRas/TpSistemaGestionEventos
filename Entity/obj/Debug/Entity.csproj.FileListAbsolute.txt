@@ -1,0 +1,6 @@
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\Entity\bin\Debug\Entity.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\Entity\bin\Debug\Entity.pdb
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\Entity\obj\Debug\Entity.csproj.AssemblyReference.cache
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\Entity\obj\Debug\Entity.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\Entity\obj\Debug\Entity.pdb

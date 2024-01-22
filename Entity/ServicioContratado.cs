@@ -6,23 +6,15 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class ServicioContratado
+    public class ServicioContratado : Contrato
     {
         //ATRIBUTOS
-        private Persona proveedor;
-        private Persona organizador;
-        private Servicio servicioBrindado;
-        private int cantidad;
-        private double precioPorUnidad;
-        private double montoTotal;
-        private bool esPago;
-        private DateTime fechaPago;
-        private bool servicioCumplido;
+        private Usuario proveedor;
+       
 
         //PROPIEDADES
-        public Persona Proveedor { get => proveedor; set => proveedor = value; }
-        public Persona Organizador { get => organizador; set => organizador = value; }
-        public Servicio ServicioBrindado { get => servicioBrindado; set => servicioBrindado = value; }
+        public Usuario Proveedor { get => proveedor; set => proveedor = value; }
+        public Servicio ServicioContrato { get => servicioContrato; set => servicioContrato = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public double PrecioPorUnidad { get => precioPorUnidad; set => precioPorUnidad = value; }
         public double MontoTotal { get => montoTotal; set => montoTotal = value; }

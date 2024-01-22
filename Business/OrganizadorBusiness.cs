@@ -14,7 +14,7 @@ namespace Business
     {
         private readonly OrganizadorDao organizadorDao = new OrganizadorDao();
         private readonly EventoDao eventoDao = new EventoDao();
-        private readonly ServicioContratadoDao servicioContratadoDao = new ServicioContratadoDao();
+        private readonly ContratoDao servicioContratadoDao = new ContratoDao();
         private readonly InvitadoDao invitadoDao = new InvitadoDao();
        
         public void ActualizarOrganizador(Organizador organizador)

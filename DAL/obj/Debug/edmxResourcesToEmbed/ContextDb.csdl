@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbGestionEventosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CREDENCIALES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="SALT" Type="Binary" MaxLength="32" FixedLength="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="Binary" MaxLength="32" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="ORGANIZADOR" Relationship="Self.FK_CREDENCIALES_ORGANIZADOR" FromRole="CREDENCIALES" ToRole="ORGANIZADOR" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_CREDENCIALES_PROVEEDOR" FromRole="CREDENCIALES" ToRole="PROVEEDOR" />
+  </EntityType>
+  <EntityType Name="EVENTO">
+    <Key>
+      <PropertyRef Name="ID_EVENTO" />
+    </Key>
+    <Property Name="ID_EVENTO" Type="Guid" Nullable="false" />
+    <Property Name="ID_ORGANIZADOR" Type="Guid" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FECHA_HORA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_PROVINCIA" Type="Int32" />
+    <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CANT_INVITADOS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ORGANIZADOR" Relationship="Self.FK_EVENTO_ORGANIZADOR" FromRole="EVENTO" ToRole="ORGANIZADOR" />
+    <NavigationProperty Name="EVENTO_PROVEEDOR_SERVICIO" Relationship="Self.FK_EVENTO_PROVEEDOR_SERVICIO_EVENTO" FromRole="EVENTO" ToRole="EVENTO_PROVEEDOR_SERVICIO" />
+    <NavigationProperty Name="PROVINCIA" Relationship="Self.FK_EVENTO_PROVINCIA" FromRole="EVENTO" ToRole="PROVINCIA" />
+    <NavigationProperty Name="INVITADO" Relationship="Self.FK_INVITADO_EVENTO" FromRole="EVENTO" ToRole="INVITADO" />
+    <NavigationProperty Name="PAGO" Relationship="Self.FK_PAGO_EVENTO" FromRole="EVENTO" ToRole="PAGO" />
+  </EntityType>
+  <EntityType Name="EVENTO_PROVEEDOR_SERVICIO">
+    <Key>
+      <PropertyRef Name="ID_EVENTO" />
+      <PropertyRef Name="ID_PROVEEDOR" />
+      <PropertyRef Name="ID_SERVICIO" />
+    </Key>
+    <Property Name="ID_EVENTO" Type="Guid" Nullable="false" />
+    <Property Name="ID_PROVEEDOR" Type="Guid" Nullable="false" />
+    <Property Name="ID_SERVICIO" Type="Int32" Nullable="false" />
+    <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+    <Property Name="PRECIO_UNITARIO" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="MONTO_TOTAL" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PAGO" Type="Boolean" />
+    <Property Name="COMPLETADO" Type="Boolean" />
+    <NavigationProperty Name="EVENTO" Relationship="Self.FK_EVENTO_PROVEEDOR_SERVICIO_EVENTO" FromRole="EVENTO_PROVEEDOR_SERVICIO" ToRole="EVENTO" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_EVENTO_PROVEEDOR_SERVICIO_PROVEEDOR" FromRole="EVENTO_PROVEEDOR_SERVICIO" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="SERVICIO" Relationship="Self.FK_EVENTO_PROVEEDOR_SERVICIO_SERVICIO" FromRole="EVENTO_PROVEEDOR_SERVICIO" ToRole="SERVICIO" />
+  </EntityType>
+  <EntityType Name="FECHA_RESERVADA">
+    <Key>
+      <PropertyRef Name="ID_SERV_PUB" />
+      <PropertyRef Name="FECHA" />
+    </Key>
+    <Property Name="ID_SERV_PUB" Type="Guid" Nullable="false" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CANT_RESERVAS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SERVICIO_PUBLICADO" Relationship="Self.FK_FECHA_RESERVADA_SERVICIO_PUBLICADO" FromRole="FECHA_RESERVADA" ToRole="SERVICIO_PUBLICADO" />
+  </EntityType>
+  <EntityType Name="INVITADO">
+    <Key>
+      <PropertyRef Name="ID_EVENTO" />
+      <PropertyRef Name="EMAIL" />
+    </Key>
+    <Property Name="ID_EVENTO" Type="Guid" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CANT_COMPANIONS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EVENTO" Relationship="Self.FK_INVITADO_EVENTO" FromRole="INVITADO" ToRole="EVENTO" />
+  </EntityType>
+  <EntityType Name="ORGANIZADOR">
+    <Key>
+      <PropertyRef Name="ID_ORGANIZADOR" />
+    </Key>
+    <Property Name="ID_ORGANIZADOR" Type="Guid" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DNI" Type="Int64" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CREDENCIALES" Relationship="Self.FK_CREDENCIALES_ORGANIZADOR" FromRole="ORGANIZADOR" ToRole="CREDENCIALES" />
+    <NavigationProperty Name="EVENTO" Relationship="Self.FK_EVENTO_ORGANIZADOR" FromRole="ORGANIZADOR" ToRole="EVENTO" />
+    <NavigationProperty Name="PROVINCIA" Relationship="Self.FK_ORGANIZADOR_PROVINCIA" FromRole="ORGANIZADOR" ToRole="PROVINCIA" />
+  </EntityType>
+  <EntityType Name="PAGO">
+    <Key>
+      <PropertyRef Name="ID_EVENTO" />
+      <PropertyRef Name="ID_PROVEEDOR" />
+      <PropertyRef Name="ID_SERVICIO" />
+    </Key>
+    <Property Name="ID_PAGO" Type="Guid" />
+    <Property Name="ID_EVENTO" Type="Guid" Nullable="false" />
+    <Property Name="ID_PROVEEDOR" Type="Guid" Nullable="false" />
+    <Property Name="ID_SERVICIO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_PAGO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MONTO" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="EVENTO" Relationship="Self.FK_PAGO_EVENTO" FromRole="PAGO" ToRole="EVENTO" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_PAGO_PROVEEDOR" FromRole="PAGO" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="SERVICIO" Relationship="Self.FK_PAGO_SERVICIO" FromRole="PAGO" ToRole="SERVICIO" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="ID_PROVEEDOR" />
+    </Key>
+    <Property Name="ID_PROVEEDOR" Type="Guid" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DNI" Type="Int64" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PUNTAJE" Type="Decimal" Precision="4" Scale="2" />
+    <NavigationProperty Name="CREDENCIALES" Relationship="Self.FK_CREDENCIALES_PROVEEDOR" FromRole="PROVEEDOR" ToRole="CREDENCIALES" />
+    <NavigationProperty Name="EVENTO_PROVEEDOR_SERVICIO" Relationship="Self.FK_EVENTO_PROVEEDOR_SERVICIO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="EVENTO_PROVEEDOR_SERVICIO" />
+    <NavigationProperty Name="PAGO" Relationship="Self.FK_PAGO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="PAGO" />
+    <NavigationProperty Name="PROVINCIA" Relationship="Self.FK_PROVEEDOR_PROVINCIA" FromRole="PROVEEDOR" ToRole="PROVINCIA" />
+    <NavigationProperty Name="SERVICIO_PUBLICADO" Relationship="Self.FK_SERVICIO_PUBLICADO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="SERVICIO_PUBLICADO" />
+  </EntityType>
+  <EntityType Name="PROVINCIA">
+    <Key>
+      <PropertyRef Name="ID_PROVINCIA" />
+    </Key>
+    <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EVENTO" Relationship="Self.FK_EVENTO_PROVINCIA" FromRole="PROVINCIA" ToRole="EVENTO" />
+    <NavigationProperty Name="ORGANIZADOR" Relationship="Self.FK_ORGANIZADOR_PROVINCIA" FromRole="PROVINCIA" ToRole="ORGANIZADOR" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_PROVEEDOR_PROVINCIA" FromRole="PROVINCIA" ToRole="PROVEEDOR" />
+  </EntityType>
+  <EntityType Name="SERVICIO">
+    <Key>
+      <PropertyRef Name="ID_SERVICIO" />
+    </Key>
+    <Property Name="ID_SERVICIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CATEGORIA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EVENTO_PROVEEDOR_SERVICIO" Relationship="Self.FK_EVENTO_PROVEEDOR_SERVICIO_SERVICIO" FromRole="SERVICIO" ToRole="EVENTO_PROVEEDOR_SERVICIO" />
+    <NavigationProperty Name="PAGO" Relationship="Self.FK_PAGO_SERVICIO" FromRole="SERVICIO" ToRole="PAGO" />
+    <NavigationProperty Name="SERVICIO_PUBLICADO" Relationship="Self.FK_SERVICIO_PUBLICADO_SERVICIO" FromRole="SERVICIO" ToRole="SERVICIO_PUBLICADO" />
+  </EntityType>
+  <EntityType Name="SERVICIO_PUBLICADO">
+    <Key>
+      <PropertyRef Name="ID_SERV_PUB" />
+    </Key>
+    <Property Name="ID_SERV_PUB" Type="Guid" Nullable="false" />
+    <Property Name="FECHA_PUBLICACION" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ID_PROVEEDOR" Type="Guid" Nullable="false" />
+    <Property Name="ID_SERVICIO" Type="Int32" Nullable="false" />
+    <Property Name="PRECIO" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ENVIO" Type="Boolean" />
+    <Property Name="FIN_DE_SEMANA" Type="Boolean" Nullable="false" />
+    <Property Name="ENTRE_SEMANA" Type="Boolean" Nullable="false" />
+    <Property Name="CANT_SERV_DIARIOS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FECHA_RESERVADA" Relationship="Self.FK_FECHA_RESERVADA_SERVICIO_PUBLICADO" FromRole="SERVICIO_PUBLICADO" ToRole="FECHA_RESERVADA" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_SERVICIO_PUBLICADO_PROVEEDOR" FromRole="SERVICIO_PUBLICADO" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="SERVICIO" Relationship="Self.FK_SERVICIO_PUBLICADO_SERVICIO" FromRole="SERVICIO_PUBLICADO" ToRole="SERVICIO" />
+  </EntityType>
+  <Association Name="FK_CREDENCIALES_ORGANIZADOR">
+    <End Role="ORGANIZADOR" Type="Self.ORGANIZADOR" Multiplicity="1" />
+    <End Role="CREDENCIALES" Type="Self.CREDENCIALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZADOR">
+        <PropertyRef Name="ID_ORGANIZADOR" />
+      </Principal>
+      <Dependent Role="CREDENCIALES">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CREDENCIALES_PROVEEDOR">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="CREDENCIALES" Type="Self.CREDENCIALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="CREDENCIALES">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVENTO_ORGANIZADOR">
+    <End Role="ORGANIZADOR" Type="Self.ORGANIZADOR" Multiplicity="1" />
+    <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZADOR">
+        <PropertyRef Name="ID_ORGANIZADOR" />
+      </Principal>
+      <Dependent Role="EVENTO">
+        <PropertyRef Name="ID_ORGANIZADOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVENTO_PROVEEDOR_SERVICIO_EVENTO">
+    <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="1" />
+    <End Role="EVENTO_PROVEEDOR_SERVICIO" Type="Self.EVENTO_PROVEEDOR_SERVICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENTO">
+        <PropertyRef Name="ID_EVENTO" />
+      </Principal>
+      <Dependent Role="EVENTO_PROVEEDOR_SERVICIO">
+        <PropertyRef Name="ID_EVENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVENTO_PROVINCIA">
+    <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+    <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCIA">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Principal>
+      <Dependent Role="EVENTO">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVITADO_EVENTO">
+    <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="1" />
+    <End Role="INVITADO" Type="Self.INVITADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENTO">
+        <PropertyRef Name="ID_EVENTO" />
+      </Principal>
+      <Dependent Role="INVITADO">
+        <PropertyRef Name="ID_EVENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PAGO_EVENTO">
+    <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="1" />
+    <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENTO">
+        <PropertyRef Name="ID_EVENTO" />
+      </Principal>
+      <Dependent Role="PAGO">
+        <PropertyRef Name="ID_EVENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVENTO_PROVEEDOR_SERVICIO_PROVEEDOR">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="EVENTO_PROVEEDOR_SERVICIO" Type="Self.EVENTO_PROVEEDOR_SERVICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="EVENTO_PROVEEDOR_SERVICIO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVENTO_PROVEEDOR_SERVICIO_SERVICIO">
+    <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="1" />
+    <End Role="EVENTO_PROVEEDOR_SERVICIO" Type="Self.EVENTO_PROVEEDOR_SERVICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICIO">
+        <PropertyRef Name="ID_SERVICIO" />
+      </Principal>
+      <Dependent Role="EVENTO_PROVEEDOR_SERVICIO">
+        <PropertyRef Name="ID_SERVICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FECHA_RESERVADA_SERVICIO_PUBLICADO">
+    <End Role="SERVICIO_PUBLICADO" Type="Self.SERVICIO_PUBLICADO" Multiplicity="1" />
+    <End Role="FECHA_RESERVADA" Type="Self.FECHA_RESERVADA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICIO_PUBLICADO">
+        <PropertyRef Name="ID_SERV_PUB" />
+      </Principal>
+      <Dependent Role="FECHA_RESERVADA">
+        <PropertyRef Name="ID_SERV_PUB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORGANIZADOR_PROVINCIA">
+    <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="1" />
+    <End Role="ORGANIZADOR" Type="Self.ORGANIZADOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCIA">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Principal>
+      <Dependent Role="ORGANIZADOR">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PAGO_PROVEEDOR">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="PAGO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PAGO_SERVICIO">
+    <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="1" />
+    <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICIO">
+        <PropertyRef Name="ID_SERVICIO" />
+      </Principal>
+      <Dependent Role="PAGO">
+        <PropertyRef Name="ID_SERVICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROVEEDOR_PROVINCIA">
+    <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="1" />
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVINCIA">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Principal>
+      <Dependent Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SERVICIO_PUBLICADO_PROVEEDOR">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="SERVICIO_PUBLICADO" Type="Self.SERVICIO_PUBLICADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="SERVICIO_PUBLICADO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SERVICIO_PUBLICADO_SERVICIO">
+    <End Role="SERVICIO" Type="Self.SERVICIO" Multiplicity="1" />
+    <End Role="SERVICIO_PUBLICADO" Type="Self.SERVICIO_PUBLICADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICIO">
+        <PropertyRef Name="ID_SERVICIO" />
+      </Principal>
+      <Dependent Role="SERVICIO_PUBLICADO">
+        <PropertyRef Name="ID_SERVICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbGestionEventos" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CREDENCIALES" EntityType="Self.CREDENCIALES" />
+    <EntitySet Name="EVENTO" EntityType="Self.EVENTO" />
+    <EntitySet Name="EVENTO_PROVEEDOR_SERVICIO" EntityType="Self.EVENTO_PROVEEDOR_SERVICIO" />
+    <EntitySet Name="FECHA_RESERVADA" EntityType="Self.FECHA_RESERVADA" />
+    <EntitySet Name="INVITADO" EntityType="Self.INVITADO" />
+    <EntitySet Name="ORGANIZADOR" EntityType="Self.ORGANIZADOR" />
+    <EntitySet Name="PAGO" EntityType="Self.PAGO" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+    <EntitySet Name="PROVINCIA" EntityType="Self.PROVINCIA" />
+    <EntitySet Name="SERVICIO" EntityType="Self.SERVICIO" />
+    <EntitySet Name="SERVICIO_PUBLICADO" EntityType="Self.SERVICIO_PUBLICADO" />
+    <AssociationSet Name="FK_CREDENCIALES_ORGANIZADOR" Association="Self.FK_CREDENCIALES_ORGANIZADOR">
+      <End Role="ORGANIZADOR" EntitySet="ORGANIZADOR" />
+      <End Role="CREDENCIALES" EntitySet="CREDENCIALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CREDENCIALES_PROVEEDOR" Association="Self.FK_CREDENCIALES_PROVEEDOR">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="CREDENCIALES" EntitySet="CREDENCIALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVENTO_ORGANIZADOR" Association="Self.FK_EVENTO_ORGANIZADOR">
+      <End Role="ORGANIZADOR" EntitySet="ORGANIZADOR" />
+      <End Role="EVENTO" EntitySet="EVENTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVENTO_PROVEEDOR_SERVICIO_EVENTO" Association="Self.FK_EVENTO_PROVEEDOR_SERVICIO_EVENTO">
+      <End Role="EVENTO" EntitySet="EVENTO" />
+      <End Role="EVENTO_PROVEEDOR_SERVICIO" EntitySet="EVENTO_PROVEEDOR_SERVICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVENTO_PROVINCIA" Association="Self.FK_EVENTO_PROVINCIA">
+      <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+      <End Role="EVENTO" EntitySet="EVENTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVITADO_EVENTO" Association="Self.FK_INVITADO_EVENTO">
+      <End Role="EVENTO" EntitySet="EVENTO" />
+      <End Role="INVITADO" EntitySet="INVITADO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PAGO_EVENTO" Association="Self.FK_PAGO_EVENTO">
+      <End Role="EVENTO" EntitySet="EVENTO" />
+      <End Role="PAGO" EntitySet="PAGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVENTO_PROVEEDOR_SERVICIO_PROVEEDOR" Association="Self.FK_EVENTO_PROVEEDOR_SERVICIO_PROVEEDOR">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="EVENTO_PROVEEDOR_SERVICIO" EntitySet="EVENTO_PROVEEDOR_SERVICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVENTO_PROVEEDOR_SERVICIO_SERVICIO" Association="Self.FK_EVENTO_PROVEEDOR_SERVICIO_SERVICIO">
+      <End Role="SERVICIO" EntitySet="SERVICIO" />
+      <End Role="EVENTO_PROVEEDOR_SERVICIO" EntitySet="EVENTO_PROVEEDOR_SERVICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FECHA_RESERVADA_SERVICIO_PUBLICADO" Association="Self.FK_FECHA_RESERVADA_SERVICIO_PUBLICADO">
+      <End Role="SERVICIO_PUBLICADO" EntitySet="SERVICIO_PUBLICADO" />
+      <End Role="FECHA_RESERVADA" EntitySet="FECHA_RESERVADA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORGANIZADOR_PROVINCIA" Association="Self.FK_ORGANIZADOR_PROVINCIA">
+      <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+      <End Role="ORGANIZADOR" EntitySet="ORGANIZADOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PAGO_PROVEEDOR" Association="Self.FK_PAGO_PROVEEDOR">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="PAGO" EntitySet="PAGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PAGO_SERVICIO" Association="Self.FK_PAGO_SERVICIO">
+      <End Role="SERVICIO" EntitySet="SERVICIO" />
+      <End Role="PAGO" EntitySet="PAGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROVEEDOR_PROVINCIA" Association="Self.FK_PROVEEDOR_PROVINCIA">
+      <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SERVICIO_PUBLICADO_PROVEEDOR" Association="Self.FK_SERVICIO_PUBLICADO_PROVEEDOR">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="SERVICIO_PUBLICADO" EntitySet="SERVICIO_PUBLICADO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SERVICIO_PUBLICADO_SERVICIO" Association="Self.FK_SERVICIO_PUBLICADO_SERVICIO">
+      <End Role="SERVICIO" EntitySet="SERVICIO" />
+      <End Role="SERVICIO_PUBLICADO" EntitySet="SERVICIO_PUBLICADO" />
+    </AssociationSet>
+    <FunctionImport Name="SP_NUEVO_USUARIO">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="apellido" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="idProvincia" Mode="In" Type="Int32" />
+      <Parameter Name="direccion" Mode="In" Type="String" />
+      <Parameter Name="telefono" Mode="In" Type="String" />
+      <Parameter Name="dni" Mode="In" Type="Int64" />
+      <Parameter Name="esProveedor" Mode="In" Type="Boolean" />
+      <Parameter Name="salt" Mode="In" Type="Binary" />
+      <Parameter Name="password" Mode="In" Type="Binary" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

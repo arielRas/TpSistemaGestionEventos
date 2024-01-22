@@ -9,6 +9,7 @@ namespace Entity
     public class EventoPublic
     {
         //PROPIEDADES PUBLICAS
+        public Usuario Organizador {  get; set; }
         public Guid CodigoEvento { get; set; }
         public string NombreEvento { get; set; }
         public DateTime FechaHora { get; set; }

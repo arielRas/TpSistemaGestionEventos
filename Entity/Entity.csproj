@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contrato.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="FechaReservada.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="Servicio.cs" />
     <Compile Include="ServicioContratado.cs" />
+    <Compile Include="ServicioPorCumplir.cs" />
     <Compile Include="ServicioPublicado.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

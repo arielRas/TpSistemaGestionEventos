@@ -1,0 +1,14 @@
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\DAL.dll.config
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\DAL.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\DAL.pdb
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\Entity.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\EntityFramework.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\Entity.pdb
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\EntityFramework.xml
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\obj\Debug\DAL.dll
+C:\Users\Ariel\Desktop\TpSistemaGestionEventos\DAL\obj\Debug\DAL.pdb

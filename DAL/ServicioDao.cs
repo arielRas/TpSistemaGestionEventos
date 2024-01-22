@@ -35,5 +35,26 @@ namespace DAL
             }
             catch { throw; }
         }
+
+        public Servicio GetServicio(int idServicio)
+        {
+            try
+            {
+                using(DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    var servicioDb = ctx.SERVICIO.SingleOrDefault(S => S.ID_SERVICIO == idServicio);
+
+                    var servicio = new Servicio
+                    {
+                        idServicio = servicioDb.ID_SERVICIO,
+                        Categoria= servicioDb.CATEGORIA,
+                        Descripcion= servicioDb.DESCRIPCION
+                    };
+
+                    return servicio;
+                }
+            }
+            catch { throw; }
+        }
     }
 }

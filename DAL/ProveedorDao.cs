@@ -11,6 +11,32 @@ namespace DAL
 {
     public class ProveedorDao
     {    
+        public Proveedor GetProveedor(Guid idProveedor)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    var proveedorDb = ctx.PROVEEDOR.SingleOrDefault(P => P.ID_PROVEEDOR == idProveedor) ?? throw new Exception("El usuario solicitado no existe");
+
+                    var proveedor = new Proveedor
+                    {
+                        Id = proveedorDb.ID_PROVEEDOR,
+                        Nombre = proveedorDb.NOMBRE,
+                        Apellido = proveedorDb.APELLIDO,
+                        Email = proveedorDb.EMAIL,
+                        Dni = proveedorDb.DNI,
+                        Telefono = proveedorDb.TELEFONO,
+                        Provincia = ProvinciaDao.GetProvincia(proveedorDb.ID_PROVINCIA),
+                        Direccion = proveedorDb.DIRECCION
+                    };
+
+                    return proveedor;
+                }
+            }
+            catch { throw; }
+        }
+
         public Proveedor GetProveedor(string email)
         {
             try

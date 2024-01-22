@@ -103,7 +103,7 @@
     <Compile Include="SERVICIO.cs">
       <DependentUpon>ContextDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="ServicioContratadoDao.cs" />
+    <Compile Include="ContratoDao.cs" />
     <Compile Include="ServicioDao.cs" />
     <Compile Include="ServicioPublicadoDao.cs" />
     <Compile Include="SERVICIO_PUBLICADO.cs">

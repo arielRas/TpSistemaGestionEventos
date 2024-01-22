@@ -58,7 +58,7 @@ namespace DAL
         }
 
 
-        public List<FechaReservada> GetAllFechasReservadas(Guid codPublicacion)
+        public List<FechaReservada> ListarFechasReservadas(Guid codPublicacion)
         {
             try
             {

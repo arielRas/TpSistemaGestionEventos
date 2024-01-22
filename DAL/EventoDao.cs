@@ -153,6 +153,7 @@ namespace DAL
 
                     var eventoPublic = new EventoPublic
                     {
+                        Organizador = new Usuario { Id = eventoDb.ID_ORGANIZADOR},
                         CodigoEvento = eventoDb.ID_EVENTO,
                         NombreEvento = eventoDb.NOMBRE,
                         FechaHora = eventoDb.FECHA_HORA,

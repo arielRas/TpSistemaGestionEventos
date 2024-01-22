@@ -11,11 +11,11 @@ namespace Entity
         //ATRIBUTOS        
         private float puntaje;      
         private List<ServicioPublicado>serviciosPublicados = new List<ServicioPublicado>();
-        private List<ServicioContratado>serviciosPorCumplir = new List<ServicioContratado>();
+        private List<ServicioPorCumplir> serviciosPorCumplir = new List<ServicioPorCumplir>();
 
         //PROPIEDADES
         public float Puntaje { get => puntaje; set => puntaje = value; }
         public List<ServicioPublicado> ServiciosPublicados { get => serviciosPublicados; set => serviciosPublicados = value; }
-        public List<ServicioContratado> ServiciosPorCumplir { get => serviciosPorCumplir; set => serviciosPorCumplir = value; }
+        public List<ServicioPorCumplir> ServiciosPorCumplir { get => serviciosPorCumplir; set => serviciosPorCumplir = value; }
     }       
 }
