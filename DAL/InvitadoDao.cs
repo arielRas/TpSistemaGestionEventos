@@ -95,5 +95,17 @@ namespace DAL
             }
             catch { throw; }
         }
+
+        public bool HayInvitados(Guid codEvento)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    return ctx.INVITADO.Any(I => I.ID_EVENTO == codEvento);
+                }
+            }
+            catch { throw; }
+        }
     }
 }

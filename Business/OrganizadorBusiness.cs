@@ -14,7 +14,7 @@ namespace Business
     {
         private readonly OrganizadorDao organizadorDao = new OrganizadorDao();
         private readonly EventoDao eventoDao = new EventoDao();
-        private readonly ContratoDao servicioContratadoDao = new ContratoDao();
+        private readonly ContratoDao contratoDao = new ContratoDao();
         private readonly InvitadoDao invitadoDao = new InvitadoDao();
        
         public void ActualizarOrganizador(Organizador organizador)
@@ -46,16 +46,51 @@ namespace Business
         {
             try
             {
-                organizador.Eventos = ListarEventos(organizador.Id);
+                if (HayEventos(organizador.Id))
+                {
+                    organizador.Eventos = ListarEventos(organizador.Id);
 
-                organizador.Eventos.ForEach(E => E.ServContratados = ListarServiciosContratados(E.CodigoEvento));
+                    foreach(var evento in organizador.Eventos)
+                    {
+                        if(HayServiciosContratados(evento.CodigoEvento)) evento.ServContratados = ListarServiciosContratados(evento.CodigoEvento);
 
-                organizador.Eventos.ForEach(E => E.Invitados = ListarInvitados(E.CodigoEvento));
-
+                        if (HayInvitados(evento.CodigoEvento)) evento.Invitados = ListarInvitados(evento.CodigoEvento);
+                    }
+                }
                 return organizador;
             }
             catch { throw; }
         }
+
+        private bool HayEventos(Guid idOrganizador)
+        {
+            try
+            {
+                return eventoDao.HayEventos(idOrganizador);
+            }
+            catch { throw; }
+        }
+
+
+        private bool HayServiciosContratados(Guid codEvento)
+        {
+            try
+            {
+                return contratoDao.HayServiciosContratados(codEvento);
+            }
+            catch { throw; }
+        }
+
+
+        private bool HayInvitados(Guid codEvento)
+        {
+            try
+            {
+                return invitadoDao.HayInvitados(codEvento);
+            }
+            catch { throw; }
+        }
+
 
         private List<Evento> ListarEventos(Guid idOrganizador)
         {
@@ -70,10 +105,11 @@ namespace Business
         {
             try
             {
-                return servicioContratadoDao.ListarServiciosContratados(codEvento);
+                return contratoDao.ListarServiciosContratados(codEvento);
             }
             catch { throw; }
         }
+
 
         private List<Invitado> ListarInvitados(Guid CodEvento)
         {
