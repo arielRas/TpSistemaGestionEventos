@@ -23,7 +23,33 @@ namespace DAL
         }
 
 
-        public void AltaEvento(Evento evento, Guid codOrganizador)
+        public bool ExisteEvento(Guid codEvento)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    return ctx.EVENTO.Any(E => E.ID_EVENTO == codEvento);
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public bool EsEventoFinalizado(Guid codEvento, DateTime fechaHoraActual)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    return ctx.EVENTO.Any(E => E.ID_EVENTO == codEvento && E.FECHA_HORA <= fechaHoraActual);
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public void AltaEvento(Evento evento, Guid idOrganizador)
         {
             try
             {
@@ -31,7 +57,7 @@ namespace DAL
                 {
                     var eventoDb = new EVENTO
                     {
-                       ID_ORGANIZADOR = codOrganizador,
+                       ID_ORGANIZADOR = idOrganizador,
                        NOMBRE = evento.NombreEvento,
                        DESCRIPCION = evento.Descripcion,
                        FECHA_HORA = evento.FechaHora,
