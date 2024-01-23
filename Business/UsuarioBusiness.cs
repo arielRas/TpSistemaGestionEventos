@@ -25,11 +25,11 @@ namespace Business
             {
                 if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) throw new Exception("El usuario y la contraseña no pueden estar vacios");
 
-                if (!credencialesDao.ExisteUsuario(email, esProveedor)) throw new Exception("El usuario ingresado no existe");
+                if (!ExisteUsuario(email, esProveedor)) throw new Exception("El usuario ingresado no existe");
 
-                Guid idUsuario = credencialesDao.GetIdUsuario(email, esProveedor);
+                Guid idUsuario = GetIdUsuario(email, esProveedor);
 
-                byte[] salt = credencialesDao.GetUsuarioSalt(idUsuario);
+                byte[] salt = GetUsuarioSalt(idUsuario);
 
                 byte[] hashedPassword = encrypt.GethashedPassword(password, salt);
 
@@ -37,6 +37,37 @@ namespace Business
             }
             catch { throw; }
         }
+
+
+        private bool ExisteUsuario(string email, bool esProveedor)
+        {
+            try
+            {
+                return credencialesDao.ExisteUsuario(email, esProveedor);
+            }
+            catch { throw; }
+        }
+
+
+        private Guid GetIdUsuario(string email, bool esProveedor)
+        {
+            try
+            {
+                return credencialesDao.GetIdUsuario(email, esProveedor);
+            }
+            catch { throw; }
+        }
+
+
+        private byte[] GetUsuarioSalt(Guid idUsuario)
+        {
+            try
+            {
+                return credencialesDao.GetUsuarioSalt(idUsuario);
+            }
+            catch { throw; }
+        }
+
 
         public void AltaUsuario(Usuario usuario, string password, bool esProveedor)
         {

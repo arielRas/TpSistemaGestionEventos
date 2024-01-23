@@ -15,13 +15,54 @@ namespace DAL
             {
                 using(DbGestionEventos ctx = new DbGestionEventos())
                 {
-                    if (esProveedor) return ctx.PROVEEDOR.Any(P => P.EMAIL == email);
+                    bool existeUsuario;
 
-                    return ctx.ORGANIZADOR.Any(O => O.EMAIL == email);                   
+                    if (esProveedor) existeUsuario = ctx.PROVEEDOR.Any(P => P.EMAIL == email);
+
+                    existeUsuario = ctx.ORGANIZADOR.Any(O => O.EMAIL == email); 
+                    
+                    return existeUsuario;
                 }
             }
             catch { throw; }
         }
+
+
+        public Guid GetIdUsuario(string email, bool esProveedor)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    var idUsuario = new Guid();
+
+                    if (esProveedor) idUsuario = ctx.PROVEEDOR.Where(P => P.EMAIL == email).Select(P => P.ID_PROVEEDOR).FirstOrDefault();
+
+                    idUsuario = ctx.ORGANIZADOR.Where(P => P.EMAIL == email).Select(P => P.ID_ORGANIZADOR).FirstOrDefault();
+
+                    if (idUsuario == null) throw new Exception("El usuario solicitado no existe");
+
+                    return idUsuario;
+                }
+            }
+            catch { throw; }
+        }
+
+
+        public byte[] GetUsuarioSalt(Guid idUsuario)
+        {
+            try
+            {
+                using (DbGestionEventos ctx = new DbGestionEventos())
+                {
+                    byte[] salt = ctx.CREDENCIALES.Where(C => C.ID == idUsuario).Select(C => C.SALT).FirstOrDefault() ?? throw new Exception("El usuario no existe");
+
+                    return salt;
+                }
+            }
+            catch { throw; }
+        }
+
 
         public bool ValidarCredenciales(Guid idUsuario, byte[] password)
         {
@@ -35,34 +76,7 @@ namespace DAL
             catch { throw; }
         }
         
-        public Guid GetIdUsuario(string email, bool esProveedor)
-        {
-            try
-            {
-                using (DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    if(esProveedor) return ctx.PROVEEDOR.Where(P => P.EMAIL == email).Select(P => P.ID_PROVEEDOR).FirstOrDefault();
-
-                    return ctx.ORGANIZADOR.Where(P => P.EMAIL == email).Select(P => P.ID_ORGANIZADOR).FirstOrDefault();
-                }
-            }
-            catch { throw; }
-        }
-
-        public byte[] GetUsuarioSalt(Guid idUsuario)
-        {
-            try
-            {
-                using (DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    byte[] salt = ctx.CREDENCIALES.Where(C => C.ID == idUsuario).Select(C => C.SALT).FirstOrDefault() ?? throw new Exception("El usuario no existe");
-                    
-                    return salt;
-                }
-            }
-            catch { throw; }
-        }
-
+        
 
         public void AltaCredencial(Guid idUsuario, byte[] salt, byte[] hashedPassword)
         {
