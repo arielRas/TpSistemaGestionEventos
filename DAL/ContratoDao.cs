@@ -1,6 +1,7 @@
 ﻿using Entity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,24 +72,21 @@ namespace DAL
             try
             {
                 using (DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    var serviciosPorCumplir = new List<ServicioPorCumplir>();
-
-                    if (serviciosPorCumplir.Any())
-                    {
-                        serviciosPorCumplir = ctx.EVENTO_PROVEEDOR_SERVICIO
+                {  
+                    var serviciosPorCumplir = ctx.EVENTO_PROVEEDOR_SERVICIO
                                              .Where(E => E.ID_PROVEEDOR == idProveedor && E.COMPLETADO == false)
-                                             .Select(E =>  new ServicioPorCumplir
+                                             .Select(E => new ServicioPorCumplir
                                              {
-                                                 Evento = new EventoPublic { CodigoEvento = E.ID_EVENTO },
+                                                 CodEvento = E.ID_EVENTO,
                                                  ServicioContrato = new Servicio { idServicio = E.ID_SERVICIO },
                                                  Cantidad = E.CANTIDAD,
                                                  PrecioPorUnidad = Convert.ToDouble(E.PRECIO_UNITARIO),
                                                  MontoTotal = Convert.ToDouble(E.MONTO_TOTAL),
                                                  EsPago = Convert.ToBoolean(E.PAGO),
                                                  ServicioCumplido = Convert.ToBoolean(E.COMPLETADO)
-                                             }).ToList();                                                                        
-                    }
+                                             }).ToList();
+
+
                     return serviciosPorCumplir;
                 }
             }

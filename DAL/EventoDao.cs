@@ -9,20 +9,7 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public class EventoDao
-    {
-        public bool ExisteEvento(Guid codEvento)
-        {
-            try
-            {
-                using (DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    return ctx.EVENTO.Any(E => E.ID_EVENTO == codEvento);
-                }
-            }
-            catch { throw; }
-        }
-
-
+    {  
         public bool HayEventos(Guid codOrganizador)
         {
             try
@@ -140,63 +127,7 @@ namespace DAL
                 }
             }
             catch { throw; }
-        }
-
-
-        public EventoPublic GetEventoPublic(Guid codEvento)
-        {
-            try
-            {
-                using (DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    var eventoDb = ctx.EVENTO.SingleOrDefault(E => E.ID_EVENTO == codEvento) ?? throw new Exception("No se encuentra el evento indicado");
-
-                    var eventoPublic = new EventoPublic
-                    {
-                        Organizador = new Usuario { Id = eventoDb.ID_ORGANIZADOR},
-                        CodigoEvento = eventoDb.ID_EVENTO,
-                        NombreEvento = eventoDb.NOMBRE,
-                        FechaHora = eventoDb.FECHA_HORA,
-                        Provincia = ProvinciaDao.GetProvincia(eventoDb.ID_PROVINCIA.Value),
-                        Direccion = eventoDb.DIRECCION
-                    };
-
-                    return eventoPublic;
-                }
-            }
-            catch { throw; }
-        }
-
-
-        public List<Evento> GetAllEventosPublic(Guid codOrganizador)
-        {
-            try
-            {
-                using(DbGestionEventos ctx = new DbGestionEventos())
-                {
-                    var eventosDb = ctx.EVENTO.Where(E => E.ID_ORGANIZADOR == codOrganizador).ToList();
-
-                    var eventos = new List<Evento>();
-
-                    foreach(var eventoDb in eventosDb)
-                    {
-                        var evento = new Evento 
-                        {
-                            CodigoEvento = eventoDb.ID_EVENTO,
-                            NombreEvento = eventoDb.NOMBRE,
-                            FechaHora = eventoDb.FECHA_HORA,
-                            Provincia = ProvinciaDao.GetProvincia(eventoDb.ID_PROVINCIA.Value),
-                            Direccion = eventoDb.DIRECCION
-                        };
-
-                        eventos.Add(evento);
-                    }
-
-                    return eventos;
-                }
-            }
-            catch { throw; }
-        }
+        }         
         
     }
 }

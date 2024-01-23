@@ -8,12 +8,20 @@ namespace Entity
 {
     public class EventoPublic
     {
-        //PROPIEDADES PUBLICAS
-        public Usuario Organizador {  get; set; }
-        public Guid CodigoEvento { get; set; }
-        public string NombreEvento { get; set; }
-        public DateTime FechaHora { get; set; }
-        public string Provincia { get; set; }
-        public string Direccion { get; set; }
+        //CONSTRUCTOR
+        public EventoPublic(Evento evento)
+        { 
+            this.evento = evento;
+        }
+
+        //ATRIBUTOS
+        private Evento evento;
+
+        //PROPIEDADES
+        public Usuario Organizador { get; set; }
+        public string NombreEvento { get => evento.NombreEvento; }
+        public DateTime FechaHora { get => evento.FechaHora; }
+        public string Provincia { get => evento.Provincia; }
+        public string Direccion { get => evento.Direccion; }
     }
 }

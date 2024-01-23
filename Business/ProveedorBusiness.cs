@@ -56,6 +56,8 @@ namespace Business
 
                 if(HayServiciosPorCumplir(proveedor.Id)) proveedor.ServiciosPorCumplir = ListarServiciosPorCumplir(proveedor.Id);
 
+                if (HayServiciosPorCumplir(proveedor.Id)) ListarServiciosPorCumplir(proveedor.Id).ForEach(S => proveedor.ServiciosPorCumplir.Add(S));
+
                 return proveedor;
             }
             catch { throw; }
@@ -85,11 +87,11 @@ namespace Business
         {
             try
             {
-                var serviciosPorCumplir = contratoDao.ListarServiciosPorCumplir(idProveedor);
+                List<ServicioPorCumplir> serviciosPorCumplir = contratoDao.ListarServiciosPorCumplir(idProveedor);
 
                 foreach (var servicio in serviciosPorCumplir)
                 {
-                    servicio.Evento = GetEventoPublic(servicio.Evento.CodigoEvento);
+                    servicio.Evento = GetEventoPublic(servicio.CodEvento);
                     servicio.Evento.Organizador = GetOrganizador(servicio.Evento.Organizador.Id);
                 }
 
@@ -103,7 +105,11 @@ namespace Business
         {
             try
             {
-                return eventoDao.GetEventoPublic(codEvento);
+                Evento evento = eventoDao.GetEvento(codEvento);
+
+                EventoPublic eventoPublic = new EventoPublic(evento);
+
+                return eventoPublic;
             }
             catch { throw; }
         }
