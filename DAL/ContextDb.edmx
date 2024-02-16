@@ -324,18 +324,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SP_NUEVO_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-          <Parameter Name="apellido" Type="varchar" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="idProvincia" Type="int" Mode="In" />
-          <Parameter Name="direccion" Type="varchar" Mode="In" />
-          <Parameter Name="telefono" Type="varchar" Mode="In" />
-          <Parameter Name="dni" Type="bigint" Mode="In" />
-          <Parameter Name="esProveedor" Type="bit" Mode="In" />
-          <Parameter Name="salt" Type="varbinary" Mode="In" />
-          <Parameter Name="password" Type="varbinary" Mode="In" />
-        </Function>
         <EntityContainer Name="DbGestionEventosModelStoreContainer">
           <EntitySet Name="CREDENCIALES" EntityType="Self.CREDENCIALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EVENTO" EntityType="Self.EVENTO" Schema="dbo" store:Type="Tables" />
@@ -995,7 +983,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_NUEVO_USUARIO" FunctionName="DbGestionEventosModel.Store.SP_NUEVO_USUARIO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
